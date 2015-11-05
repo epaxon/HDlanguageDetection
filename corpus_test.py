@@ -19,7 +19,15 @@ test_dir = '/lang_texts/test/processed_test'
 # parameters
 N = 10000 # dimension of random index vectors
 k = 5000 # number of + (or -)
-cluster_min = 3
+# our letter clusters are n-grams. max is longest text, min is 1
+# 98451 digters_uit_Suid_afrika.txt
+# 89425 hermaphrodisie_en_uranisme.txt
+# 573251 Finnish-Kivi-7.txt
+# 155151 hamlet_finnish.txt
+# 213716 freud.txt
+# 225323 tres_comedias_modernas.txt
+
+cluster_min = 1
 cluster_max = 3 # size of max letter cluster
 ordy = [1]
 lang_map = {'af':'afr','bg':'bul','cs':'ces','da':'dan','nl':'nld','de':'deu','en':'eng','et':'est','fi':'fin','fr':'fra','el':'ell','hu':'hun','it':'ita','lv':'lav','lt':'lit','pl':'pol','pt':'por','ro':'ron','sk':'slk','sl':'slv','es':'spa','sv':'swe'}
