@@ -30,63 +30,63 @@ languages = lang_map.values()
 
 
 for N in Ns:
-	for kk in ks:
-		k = int(N * kk)
-		###############################
-		# generate random indexing for letters, reused throughout
-		cluster_sizes = xrange(cluster_min,cluster_max+1)
-		RI_letters = random_idx.generate_letter_id_vectors(N,k)
+    for kk in ks:
+        k = int(N * kk)
+        ###############################
+        # generate random indexing for letters, reused throughout
+        cluster_sizes = xrange(cluster_min,cluster_max+1)
+        RI_letters = random_idx.generate_letter_id_vectors(N,k)
 
-		
-		##############################
-		# iterate over cluster sizes for language vectors ONLY
-		for ordered in ordy:
-			
-				if ordered == 0:
-						ord_str = 'unordered'
-				else:
-						ord_str = 'ordered'
-			
-				print "N =", N, ", k =", k, ", ", ord_str
-				for cluster_sz in cluster_sizes:
-							
-							##print "~~~~~~~~~~"
-							total_vectors = []
-							# calculate language vectors
-							lang_vectors = random_idx.generate_RI_lang(N, RI_letters, cluster_sz, ordered, languages=languages)
-							#lang_vectors = random_idx.generate_RI_lang_words(N, RI_letters, languages=languages)
-							total_vectors.append(lang_vectors)
+        
+        ##############################
+        # iterate over cluster sizes for language vectors ONLY
+        for ordered in ordy:
+            
+            if ordered == 0:
+                    ord_str = 'unordered'
+            else:
+                    ord_str = 'ordered'
+        
+            print "N =", N, ", k =", k, ", ", ord_str
+            for cluster_sz in cluster_sizes:
+                
+                ##print "~~~~~~~~~~"
+                total_vectors = []
+                # calculate language vectors
+                lang_vectors = random_idx.generate_RI_lang(N, RI_letters, cluster_sz, ordered, languages=languages)
+                #lang_vectors = random_idx.generate_RI_lang_words(N, RI_letters, languages=languages)
+                total_vectors.append(lang_vectors)
 
-							# print cosine angles 
-							#print '=========='
-							
+                # print cosine angles 
+                #print '=========='
+                
 
-						#	print 'N = ' + str(N) + '; k = ' + str(k) + '; letters clusters are ' + str(cluster_sz) + ', ' + ord_str + '\n'
-							cosangles = utils.cosangles(lang_vectors, languages)
-							variance = utils.var_measure(cosangles)
-							#print "variance of language values: " + str(utils.var_measure(cosangles))
-							final_lang = sum(total_vectors)
+                #   print 'N = ' + str(N) + '; k = ' + str(k) + '; letters clusters are ' + str(cluster_sz) + ', ' + ord_str + '\n'
+                cosangles = utils.cosangles(lang_vectors, languages)
+                variance = utils.var_measure(cosangles)
+                #print "variance of language values: " + str(utils.var_measure(cosangles))
+                final_lang = sum(total_vectors)
 
-							###############################
-							# iterate through test files and calculate correctness
-							test_fn = glob.glob(main_base + test_dir + '/*txt')
-							total = len(test_fn)
-							correct = 0
+                ###############################
+                # iterate through test files and calculate correctness
+                test_fn = glob.glob(main_base + test_dir + '/*txt')
+                total = len(test_fn)
+                correct = 0
 
-							for i in trange(total):
-									testf = test_fn[i]
-									actual_lang = re.findall('(\w+)_\d+_p.txt$', testf)[0]
-									unknown_tots = []
-									#print len(testf),testf[91:93]
-								#if testf == main_base + test_dir + '/da_432_p.txt':
-									unknown_vector = random_idx.generate_RI_text(N, RI_letters, cluster_sz, ordered,testf)
-									#unknown_vector = random_idx.generate_RI_text_words(N, RI_letters, testf)
-									unknown_tots.append(unknown_vector)
-									final_unknown = sum(unknown_tots)
-									likely_lang = utils.find_language(testf, final_unknown, final_lang, languages,display=0)
-									#print testf[91:], '=> ',likely_lang
-									if lang_map[actual_lang] == likely_lang:
-											correct +=1
+                for i in trange(total):
+                        testf = test_fn[i]
+                        actual_lang = re.findall('(\w+)_\d+_p.txt$', testf)[0]
+                        unknown_tots = []
+                        #print len(testf),testf[91:93]
+                    #if testf == main_base + test_dir + '/da_432_p.txt':
+                        unknown_vector = random_idx.generate_RI_text(N, RI_letters, cluster_sz, ordered,testf)
+                        #unknown_vector = random_idx.generate_RI_text_words(N, RI_letters, testf)
+                        unknown_tots.append(unknown_vector)
+                        final_unknown = sum(unknown_tots)
+                        likely_lang = utils.find_language(testf, final_unknown, final_lang, languages,display=0)
+                        #print testf[91:], '=> ',likely_lang
+                        if lang_map[actual_lang] == likely_lang:
+                                correct +=1
 
-							#print "for size ", cluster_sz, " ordered=", ordered, " correct: ", correct, "; total: ", total,"; final percentage correct: ", float(correct)/total, " variance=",utils.var_measure(cosangles)
-							print "cluster size", cluster_sz, ":", float(correct)/total, ", var",utils.var_measure(cosangles) 
+                #print "for size ", cluster_sz, " ordered=", ordered, " correct: ", correct, "; total: ", total,"; final percentage correct: ", float(correct)/total, " variance=",utils.var_measure(cosangles)
+                print "cluster size", cluster_sz, ":", float(correct)/total, ", var",utils.var_measure(cosangles) 

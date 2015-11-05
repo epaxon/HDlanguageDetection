@@ -29,8 +29,9 @@ test_dir = '/lang_texts/test/processed_test'
 # parameters
 N = 10000 # dimension of random index vectors
 k = 5000 # number of + (or -)
-cluster_min = 3
-cluster_max = 3 # size of max letter cluster
+
+cluster_min = 1
+cluster_max = int(subprocess.check_output(['tail', '-1', n_gram_size_file])) # size of max letter cluster
 ordy = [1]
 lang_map = {'af':'afr','bg':'bul','cs':'ces','da':'dan','nl':'nld','de':'deu','en':'eng','et':'est','fi':'fin','fr':'fra','el':'ell','hu':'hun','it':'ita','lv':'lav','lt':'lit','pl':'pol','pt':'por','ro':'ron','sk':'slk','sl':'slv','es':'spa','sv':'swe'}
 #lang_map = {'af':'afrikaans','bg':'bulgarian','cs':'czech','da':'danish','nl':'dutch','de':'german','en':'english','et':'estonian','fi':'finnish','fr':'french','el':'greek','hu':'hungarian','it':'italian','pl':'polish','pt':'portuguese','ro':'romanian','sk':'slovak','sl':'slovenian','es':'spanish','sv':'swedish'}
@@ -50,24 +51,24 @@ RI_letters = random_idx.generate_letter_id_vectors(N,k)
 ##############################
 # iterate over cluster sizes for language vectors ONLY
 for cluster_sz in cluster_sizes:
-		for ordered in ordy:
+  	for ordered in ordy:
 
-					print "~~~~~~~~~~"
-					# calculate language vectors
-					lang_vectors = random_idx.generate_RI_lang(N, RI_letters, cluster_sz, ordered, languages=languages)
-					total_vectors.append(lang_vectors)
+    print "~~~~~~~~~~"
+    # calculate language vectors
+    lang_vectors = random_idx.generate_RI_lang(N, RI_letters, cluster_sz, ordered, languages=languages)
+    total_vectors.append(lang_vectors)
 
-					# print cosine angles 
-					print '=========='
-					if ordered == 0:
-							ord_str = 'unordered!'
-					else:
-							ord_str = 'ordered!'
+    # print cosine angles 
+    print '=========='
+    if ordered == 0:
+    	ord_str = 'unordered!'
+    else:
+        ord_str = 'ordered!'
 
-					print 'N = ' + str(N) + '; k = ' + str(k) + '; letters clusters are ' + str(cluster_sz) + ', ' + ord_str + '\n'
-					cosangles,lbled_lang_vectors = utils.cosangles(lang_vectors, languages)
-					variance = utils.var_measure(cosangles)
-					print "variance of language values: " + str(utils.var_measure(cosangles))
+    print 'N = ' + str(N) + '; k = ' + str(k) + '; letters clusters are ' + str(cluster_sz) + ', ' + ord_str + '\n'
+    cosangles,lbled_lang_vectors = utils.cosangles(lang_vectors, languages)
+    variance = utils.var_measure(cosangles)
+    print "variance of language values: " + str(utils.var_measure(cosangles))
 final_lang = sum(total_vectors)
 #print final_lang.shape
 #langy = final_lang[1,:]
@@ -77,9 +78,9 @@ final_lang = sum(total_vectors)
 '''
 h,axarr = plt.subplots(len(languages),1)
 for i in xrange(len(languages)):
-	langy = final_lang[i,:]
-	axarr[i].imshow(langy[:,np.newaxis].dot(langy[np.newaxis,:]),cmap='gray',interpolation='nearest')
-	axarr[i].set_title(languages[i])
+ langy = final_lang[i,:]
+ axarr[i].imshow(langy[:,np.newaxis].dot(langy[np.newaxis,:]),cmap='gray',interpolation='nearest')
+ axarr[i].set_title(languages[i])
 plt.show()
 '''
 
@@ -97,53 +98,53 @@ print "time to create " + str(len(languages)) + " language vectors: " + str(tt1)
 #guessing_dicts = {}
 #
 #for i in trange(total):
-#		testf = test_fn[i]
-#		unknown_tots = []
-#		#guesses = {'tag':'','correct':0}
-#		for cluster_sz in cluster_sizes:
-#				for ordered in ordy:
-#						# calculate unknown vector
-#						unknown_vector = random_idx.generate_RI_text(N, RI_letters, cluster_sz, ordered,testf)
-#						unknown_tots.append(unknown_vector)
-#		final_unknown = sum(unknown_tots)
-#		likely_lang = utils.find_language(testf, final_unknown, final_lang, languages,display=0)
+#  testf = test_fn[i]
+#  unknown_tots = []
+#  #guesses = {'tag':'','correct':0}
+#  for cluster_sz in cluster_sizes:
+#    for ordered in ordy:
+#      # calculate unknown vector
+#      unknown_vector = random_idx.generate_RI_text(N, RI_letters, cluster_sz, ordered,testf)
+#      unknown_tots.append(unknown_vector)
+#  final_unknown = sum(unknown_tots)
+#  likely_lang = utils.find_language(testf, final_unknown, final_lang, languages,display=0)
 #
-#		#print testf[71:], '=> ',likely_lang
-#		try:
-#				true_lang = lang_map[testf[71:73]]
-#		except KeyError:
-#				continue
+#  #print testf[71:], '=> ',likely_lang
+#  try:
+#    true_lang = lang_map[testf[71:73]]
+#  except KeyError:
+#    continue
 #
 #
-#		if true_lang not in guessing_dicts.keys():
-#				guessing_dicts[true_lang] = {'correct':0, 'total':1}
-#		else:
-#				guessing_dicts[true_lang]['total'] += 1
+#  if true_lang not in guessing_dicts.keys():
+#    guessing_dicts[true_lang] = {'correct':0, 'total':1}
+#  else:
+#    guessing_dicts[true_lang]['total'] += 1
 #
-#		if true_lang == likely_lang[0]:
-#				correct +=1
-#				guessing_dicts[true_lang]['correct'] += 1
+#  if true_lang == likely_lang[0]:
+#    correct +=1
+#    guessing_dicts[true_lang]['correct'] += 1
 #
-#		if likely_lang[0] not in guessing_dicts[true_lang].keys():
-#				guessing_dicts[true_lang][likely_lang[0]] = 1
-#		else:
-#				guessing_dicts[true_lang][likely_lang[0]] += 1
+#  if likely_lang[0] not in guessing_dicts[true_lang].keys():
+#    guessing_dicts[true_lang][likely_lang[0]] = 1
+#  else:
+#    guessing_dicts[true_lang][likely_lang[0]] += 1
 #
 #confusion_matrix = np.zeros((len(lang_map),len(lang_map)))
 #print "\n"
 #print "correct: ", correct, "; total: ", total,"; final percentage correct: ", '%.01f' % (100*float(correct)/total)
 #language_list = guessing_dicts.keys()
 #for lang in language_list:
-#		i = lang_tots.index(lang)
-#		dicty = guessing_dicts[lang]
-#		#results = ''
-#		for key in sorted(dicty.keys()):
-#				if key == 'correct' or key == 'total':
-#						continue
-#				j = lang_tots.index(key)
-#				#results += key + ': %.01f| ' % (dicty[key]/float(dicty['total'])*100)
-#				confusion_matrix[i,j] = dicty[key]#/float(dicty['total'])*100
-#		#print lang, ': %.01f' % (100*dicty['correct']/float(dicty['total'])), '%:\n\t' + results
+#  i = lang_tots.index(lang)
+#  dicty = guessing_dicts[lang]
+#  #results = ''
+#  for key in sorted(dicty.keys()):
+#    if key == 'correct' or key == 'total':
+#      continue
+#    j = lang_tots.index(key)
+#    #results += key + ': %.01f| ' % (dicty[key]/float(dicty['total'])*100)
+#    confusion_matrix[i,j] = dicty[key]#/float(dicty['total'])*100
+#  #print lang, ': %.01f' % (100*dicty['correct']/float(dicty['total'])), '%:\n\t' + results
 #
 #utils.disp_confusion_mat(confusion_matrix, row_labels= lang_tots, col_labels = lang_tots,display=1)
 ##cm = pd.DataFrame(confusion_matrix, index = lang_tots, columns=lang_tots)
