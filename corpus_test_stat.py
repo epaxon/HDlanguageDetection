@@ -50,6 +50,7 @@ RI_letters = random_idx.generate_letter_id_vectors(N,k)
 
 ##############################
 # iterate over cluster sizes for language vectors ONLY
+# language vectors are the n-grams derived from actual words in the lang_texts
 for cluster_sz in cluster_sizes:
   	for ordered in ordy:
 
@@ -70,90 +71,10 @@ for cluster_sz in cluster_sizes:
     variance = utils.var_measure(cosangles)
     print "variance of language values: " + str(utils.var_measure(cosangles))
 final_lang = sum(total_vectors)
-#print final_lang.shape
-#langy = final_lang[1,:]
-#print langy[:,np.newaxis].shape
-#print final_lang[1,:].T.dot(final_lang[1,:]).shape
-
-'''
-h,axarr = plt.subplots(len(languages),1)
-for i in xrange(len(languages)):
- langy = final_lang[i,:]
- axarr[i].imshow(langy[:,np.newaxis].dot(langy[np.newaxis,:]),cmap='gray',interpolation='nearest')
- axarr[i].set_title(languages[i])
-plt.show()
-'''
 
 t1 = time.time()
 tt1 = t1- t0
 print "time to create " + str(len(languages)) + " language vectors: " + str(tt1)
-
-
-#t0 = time.time()
-################################
-## iterate through test files and calculate correctness
-#test_fn = glob.glob(main_base + test_dir + '/*txt')
-#total = len(test_fn)
-#correct = 0
-#guessing_dicts = {}
-#
-#for i in trange(total):
-#  testf = test_fn[i]
-#  unknown_tots = []
-#  #guesses = {'tag':'','correct':0}
-#  for cluster_sz in cluster_sizes:
-#    for ordered in ordy:
-#      # calculate unknown vector
-#      unknown_vector = random_idx.generate_RI_text(N, RI_letters, cluster_sz, ordered,testf)
-#      unknown_tots.append(unknown_vector)
-#  final_unknown = sum(unknown_tots)
-#  likely_lang = utils.find_language(testf, final_unknown, final_lang, languages,display=0)
-#
-#  #print testf[71:], '=> ',likely_lang
-#  try:
-#    true_lang = lang_map[testf[71:73]]
-#  except KeyError:
-#    continue
-#
-#
-#  if true_lang not in guessing_dicts.keys():
-#    guessing_dicts[true_lang] = {'correct':0, 'total':1}
-#  else:
-#    guessing_dicts[true_lang]['total'] += 1
-#
-#  if true_lang == likely_lang[0]:
-#    correct +=1
-#    guessing_dicts[true_lang]['correct'] += 1
-#
-#  if likely_lang[0] not in guessing_dicts[true_lang].keys():
-#    guessing_dicts[true_lang][likely_lang[0]] = 1
-#  else:
-#    guessing_dicts[true_lang][likely_lang[0]] += 1
-#
-#confusion_matrix = np.zeros((len(lang_map),len(lang_map)))
-#print "\n"
-#print "correct: ", correct, "; total: ", total,"; final percentage correct: ", '%.01f' % (100*float(correct)/total)
-#language_list = guessing_dicts.keys()
-#for lang in language_list:
-#  i = lang_tots.index(lang)
-#  dicty = guessing_dicts[lang]
-#  #results = ''
-#  for key in sorted(dicty.keys()):
-#    if key == 'correct' or key == 'total':
-#      continue
-#    j = lang_tots.index(key)
-#    #results += key + ': %.01f| ' % (dicty[key]/float(dicty['total'])*100)
-#    confusion_matrix[i,j] = dicty[key]#/float(dicty['total'])*100
-#  #print lang, ': %.01f' % (100*dicty['correct']/float(dicty['total'])), '%:\n\t' + results
-#
-#utils.disp_confusion_mat(confusion_matrix, row_labels= lang_tots, col_labels = lang_tots,display=1)
-##cm = pd.DataFrame(confusion_matrix, index = lang_tots, columns=lang_tots)
-##print cm
-##cm.plot(kind='bar', stacked=True);
-##plt.show()
-#t1 = time.time()
-#tt2 = t1 - t0
-#print "creating confusion matrix time: " + str(tt2)
 
 
 t0 = time.time()
@@ -190,34 +111,35 @@ print "dimension reduction: " + str(tt3)
 
 t0 = time.time()
 def find_letter_partner(test_letter, lang_vector):
-        # testing letter blocks for their "block partners"
-        test_vec = random_idx.id_vector(N,test_letter,alph, RI_letters, ordered=ordered)
-        #test_vec = test_vec/np.linalg.norm(test_vec)
+    # testing letter blocks for their "block partners"
+    # block partners like predicting the next letter?
+    test_vec = random_idx.id_vector(N,test_letter,alph, RI_letters, ordered=ordered)
+    #test_vec = test_vec/np.linalg.norm(test_vec)
 
-        '''
-        sub_eng = np.copy(english_vector)
-        for r in xrange(len(blocks)):
-            block = blocks[r]
-            if test_letter != block[0]:
-                sub_eng[:, RI_blocks[r,:] != 0] = 1e-2
-        print sub_eng
-        '''
+    '''
+    sub_eng = np.copy(english_vector)
+    for r in xrange(len(blocks)):
+        block = blocks[r]
+        if test_letter != block[0]:
+            sub_eng[:, RI_blocks[r,:] != 0] = 1e-2
+    print sub_eng
+    '''
 
-        cz = len(test_letter)
-        #if cz > 1:
-        #    for i in xrange(len(alph)):
-        #        english_vector -= RI_letters[i,:]
-        #english_vector /= np.linalg.norm(english_vector)
+    cz = len(test_letter)
+    #if cz > 1:
+    #    for i in xrange(len(alph)):
+    #        english_vector -= RI_letters[i,:]
+    #english_vector /= np.linalg.norm(english_vector)
 
-        #factored_eng = np.multiply(english_vector, np.roll(letter, 1))
-        factored_lang = np.multiply(lang_vector, np.roll(test_vec, 1))
-        #factored_eng = np.roll(np.multiply(english_vector, letter), -1)
-        #factored_RI_letters = RI_letters, np.roll(letter,1))
+    #factored_eng = np.multiply(english_vector, np.roll(letter, 1))
+    factored_lang = np.multiply(lang_vector, np.roll(test_vec, 1))
+    #factored_eng = np.roll(np.multiply(english_vector, letter), -1)
+    #factored_RI_letters = RI_letters, np.roll(letter,1))
 
 
-        #if len(test_letter) == 1:
-        likely_block_partner, values, partners = utils.find_language(test_letter, factored_lang, RI_letters, alph, display=1)
-        return likely_block_partner, values, partners
+    #if len(test_letter) == 1:
+    likely_block_partner, values, partners = utils.find_language(test_letter, factored_lang, RI_letters, alph, display=1)
+    return likely_block_partner, values, partners
 
 block_list = ['th']
 print lbled_lang_vectors[:][1]
