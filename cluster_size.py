@@ -21,7 +21,7 @@ all_texts = [root_dir "afrikaans/digters_uit_Suid_afrika.txt",
 ]
 max_cluster_size = 0
 for url in all_texts:
-	byteString = subprocess.check_output(["wc", "url"])
+	byteString = subprocess.check_output(["wc", url])
 	# extract digits of character count from the string
 	# only for positive numbers
 	all_counts = [int(s) for s in byteString.split() if s.isdigit()]
