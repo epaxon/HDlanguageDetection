@@ -5,7 +5,6 @@ import string
 import pandas as pd
 import matplotlib.pyplot as plt
 
-N = 10000
 k = 5000
 cluster_sz = [3]
 ordered = 1
