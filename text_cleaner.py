@@ -1,9 +1,8 @@
-# text_cleaner.py
-# preprocesses text so that it preserves only lowercase latin letters and spaces
-# Johan and Aditya, Fall 2014
-
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+
+# text_cleaner.py
+# preprocesses text so that it preserves only lowercase latin letters
 import sys
 import string
 import codecs
@@ -12,7 +11,7 @@ import re
 from unidecode import unidecode
 
 include = string.lowercase
-exclude = string.punctuation
+exclude = string.punctuation + string.whitespace + "\n\r"
 
 try:
 		if len(sys.argv)> 1 and len(sys.argv) < 3 or len(sys.argv)>3:
@@ -44,6 +43,8 @@ def cleaner(s):
 		s = re.sub(u'ü', 'ue', s) # ü -> ue
 		s = re.sub(u'ß', 'ss', s) # ß -> ss
 		s = unidecode(s)
+
+		# s = s.strip()
 		string_split = s.split()
 		new_s = ''
 
@@ -59,9 +60,7 @@ def cleaner(s):
 						if num in word:
 								num_exist = 1
 				if lowercase_exist and not num_exist:
-						new_s += word + ' '
-				else:
-						new_s += ' '
+						new_s += word
 
 		# make all letters lowercase
 		new_s = new_s.lower()
