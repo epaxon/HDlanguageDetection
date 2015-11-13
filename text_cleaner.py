@@ -30,7 +30,7 @@ def cleaner_fn(inputfn, outputfn):
 
 		for s in inputFile:
 				t = cleaner(s)
-				outputFile.write(t+'\n')
+				outputFile.write(t)
 
 		inputFile.close()
 		outputFile.close()
