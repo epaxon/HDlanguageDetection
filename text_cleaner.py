@@ -3,6 +3,7 @@
 
 # text_cleaner.py
 # preprocesses text so that it preserves only lowercase latin letters
+# there are still empty lines in the text. without any spaces or \n they should not affect the clusters?
 import sys
 import string
 import codecs

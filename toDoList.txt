@@ -21,31 +21,8 @@ can use Alice in Wonderland for data:
 
   http://www.gutenberg.org/ebooks/11
 
-Remove all non-letters from the text and make all
-letters the same case (upper of lower).  That should be
-about 100,000 letters.
 
-How this combination vector can be used to find the
-number of different letters, bigrams, trigrams, etc. in
-the text will be the next exercise.  You can start
-thinking about it.
 
-See you tomorrow,
-Pentti
-
-Hi Anna, hello Quinn,
-
-Was it midterms last week?  I hope you are please with
-how you did.
-
-Your ideas, questions and speculations about n-grams
-are right on and we could use language identification
-to test them further.  For example, there are 14,348,907
-possible pentagrams of 16 letters and the space, and
-although most of them never occur, the number of ones
-that do is too large to be covered well with a million
-bytes of text, and so the language vector would be
-specific to the data set.
 
 We may return to language identification later but
 right now I have a different task in mind.  We will
@@ -59,21 +36,6 @@ compute as you say.  The algorithm is simple.  The
 interesting thing is in seeing if and how it can be
 made to work for finding words.
 
-Besides the tree of us, several others here are
-interested in this problem and I am thinking of
-including them in the discussion.  Aditya Joshi
-(with Johan Halseth) wrote the original program and
-the paper and he has shared his Python code with us.
-He graduated in the spring, is working in industry this
-year but had plans for graduate study.  Abbas Rahimi is
-an EE postdoc and made Aditya's program into an on-line
-demo.  Mika Laiho is an engineering professor visiting
-with us from Finland.  He wrote a program akin to
-Redlich's that combines individual letters into word
-fragments and words, which is the opposite of what we'd
-do.  You should feel free to send email just to me, but
-I'll include them in the discussion with a CC.  My next
-email will be to fly this plan by them.
 
 Hi Anna and Quinn,
 
