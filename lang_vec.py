@@ -37,7 +37,7 @@ for size in cluster_sizes:
 lang_vectors.insert(0, np.zeros((1,N)))
 
 up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
-qu_vector = random_idx.generate_RI_str(N, RI_letters, 2, ordered, "uq", alph)
+qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
 if __name__ == "__main__":
     """
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     you get?
     """
     
-    result = np.dot(up2_lang_vec, RI_letters[16])
+    result = np.dot(up2_lang_vec, RI_letters[alph.find("q")])
     print "dot product of up2_lang_vec and q is %d" % (result) 
     result = np.dot(up2_lang_vec, np.transpose(qu_vector))
     print "dot product of up2_lang_vec and qu is %d" % (result) 
@@ -83,21 +83,21 @@ if __name__ == "__main__":
     vector that is the sum of the above two.
     """
     # assuming that shifting is rolling...
-    sQ = np.roll(RI_letters[16], 1)
+    sQ = np.roll(RI_letters[alph.find("q")], 1)
     bigrams_sQ = np.multiply(lang_vectors[2], sQ)
     # still need to compare to see which letter wins
     for i in range(26):
-        result = np.dot(RI_letters[i], bigrams_sQ)
+        result = np.dot(RI_letters[i], np.transpose(bigrams_sQ))
         print "dot product of bigrams_sQ and %s is %d" % (alph[i], result) 
 
     single_sQ = np.multiply(lang_vectors[1], sQ)
     for i in range(26):
-        result = np.dot(RI_letters[i], single_sQ)
+        result = np.dot(RI_letters[i], np.transpose(single_sQ))
         print "dot product of single_sQ and %s is %d" % (alph[i], result) 
 
     up2_lang_vec_sQ = np.multiply(up2_lang_vec, sQ)
     for i in range(26):
-        result = np.dot(RI_letters[i], up2_lang_vec_sQ)
+        result = np.dot(RI_letters[i], np.transpose(up2_lang_vec_sQ))
         print "dot product of up2_lang_vec_sQ and %s is %d" % (alph[i], result) 
 
 
