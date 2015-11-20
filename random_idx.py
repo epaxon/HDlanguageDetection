@@ -160,7 +160,7 @@ def generate_RI_sentence(N, RI_letters, cluster_sz, ordered, text, alph=alphabet
 def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabet):
 	text_vector = np.zeros((1, N))
 	text = utils.load_text(text_name)
-	cluster2 = ''
+	cluster = ''
 	vector = np.ones((1,N))
 	for char_num in xrange(len(text)):		
 		cluster = cluster + text[char_num]

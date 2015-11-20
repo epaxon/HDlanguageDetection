@@ -15,13 +15,6 @@ ordered = 1
 #alph = 'abc' 
 alph = string.lowercase + ' '
 
-# from generate_text.py
-# copy pasted for now. 
-def gen_lets(N=N,k=k):
-    # generate letter vectors
-    RI_letters = random_idx.generate_letter_id_vectors(N,k)
-    return RI_letters
-
 # create language vector for Alice in Wonderland made of summed n-gram vectors for each
 # n in cluster_sizes
 def create_lang_vec(cluster_sizes, N=N, k=k):
@@ -31,11 +24,11 @@ def create_lang_vec(cluster_sizes, N=N, k=k):
     for cz in cluster_sizes:
         print "generating language vector of cluster size", cz
         # which alphabet to use
-        lang_vector = random_idx.generate_RI_text(N, RI_letters, cz, ordered, "preprocessed_texts/AliceInWonderland.txt", alph)
+        lang_vector = random_idx.generate_RI_text_fast(N, RI_letters, cz, ordered, "preprocessed_texts/AliceInWonderland.txt", alph)
         total_lang += lang_vector
     return total_lang
 
-RI_letters = gen_lets()
+RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
 
 # lang_vectors in sizes 1-8
 lang_vector_dict = {};
@@ -43,7 +36,7 @@ for size in cluster_sizes:
     lang_vector_dict[size] = create_lang_vec([size])
 
 up2_lang_vec = np.add(lang_vector_dict[1], lang_vector_dict[2])
-qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
+qu_vector = random_idx.generate_RI_str(N, RI_letters, 2, ordered, "qu", alph)
 
 if __name__ == "__main__":
     """
@@ -56,7 +49,7 @@ if __name__ == "__main__":
     """
     for i in range(26):
         result = np.dot(lang_vector_dict[1], RI_letters[i])
-        print "dot product of single-letter vector and %s-vector is %f\n" % (alph[i], result) 
+        print "dot product of single-letter vector and %s-vector is %d" % (alph[i], result) 
 
     """
     Then take the language vector representing the bigrams
@@ -64,8 +57,8 @@ if __name__ == "__main__":
     you get?  And what is this language vector's dot
     product with Q?
     """    
-    result = np.dot(lang_vector_dict[2], qu_vector)
-    print "dot product of bigrams vector and qu is %f\n" % (result) 
+    result = np.dot(lang_vector_dict[2], np.transpose(qu_vector))
+    print "dot product of bigrams vector and qu is %d" % (result) 
 
     """
     Next, add the two language vectors into a single vector
@@ -75,9 +68,9 @@ if __name__ == "__main__":
     """
     
     result = np.dot(up2_lang_vec, RI_letters[16])
-    print "dot product of up2_lang_vec and q is %f\n" % (result) 
-    result = np.dot(up2_lang_vec, qu_vector)
-    print "dot product of up2_lang_vec and qu is %f\n" % (result) 
+    print "dot product of up2_lang_vec and q is %d" % (result) 
+    result = np.dot(up2_lang_vec, np.transpose(qu_vector))
+    print "dot product of up2_lang_vec and qu is %d" % (result) 
 
     """
     One more set of tests: Take the language vector for
@@ -94,17 +87,17 @@ if __name__ == "__main__":
     # still need to compare to see which letter wins
     for i in range(26):
         result = np.dot(RI_letters[i], bigrams_sQ)
-        print "dot product of bigrams_sQ and %s is %f\n" % (alph[i], result) 
+        print "dot product of bigrams_sQ and %s is %d" % (alph[i], result) 
 
     single_sQ = np.multiply(lang_vector_dict[1], sQ)
     for i in range(26):
         result = np.dot(RI_letters[i], single_sQ)
-        print "dot product of single_sQ and %s is %f\n" % (alph[i], result) 
+        print "dot product of single_sQ and %s is %d" % (alph[i], result) 
 
     up2_lang_vec_sQ = np.multiply(up2_lang_vec, sQ)
     for i in range(26):
         result = np.dot(RI_letters[i], up2_lang_vec_sQ)
-        print "dot product of up2_lang_vec_sQ and %s is %f\n" % (alph[i], result) 
+        print "dot product of up2_lang_vec_sQ and %s is %d" % (alph[i], result) 
 
 
 
