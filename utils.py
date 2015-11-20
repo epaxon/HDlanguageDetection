@@ -17,7 +17,7 @@ import itertools
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import networkx as nx
-import Table
+#import Table
 
 # date
 import time

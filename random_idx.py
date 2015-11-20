@@ -103,8 +103,7 @@ def id_vector(N, cluster, alphabet, RI_letters,ordered=0):
         return vector
 
 def generate_RI_str(N, RI_letters, cluster_sz, ordered, string, alph=alphabet):
-		# generate RI vector for "text_name"
-		# assumes text_name has .txt
+		# generate RI vector for string
 
 		text_vector = np.zeros((1,N))
 		for char_num in xrange(len(string)):

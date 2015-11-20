@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 k = 5000
+N = 10000
 # cluster_sizes is mapping to n-gram size
 # cluster_sz in random_idx referring to specific element (int) in cluster_sizes, array
 cluster_sizes = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -21,25 +22,28 @@ def gen_lets(N=N,k=k):
     RI_letters = random_idx.generate_letter_id_vectors(N,k)
     return RI_letters
 
-#need to process the text itself. lang vector made with summed n_grams (assuming cluster_sizes map to n_grams)
-#text_vector for vectors of text where don't know what language it is in yet. Since we know AliceInWonderland 
-#is in english and is used to create our language vector, our lang_vector is our text_vector.
-def create_lang_vec(N=N,k=k, cluster_sizes):
-    print "generating english vector of cluster size", cluster_sz
-    total_eng = np.zeros((1,N))
+# create language vector for Alice in Wonderland made of summed n-gram vectors for each
+# n in cluster_sizes
+def create_lang_vec(cluster_sizes, N=N, k=k):
+    
+    total_lang = np.zeros((1,N))
     # generate english vector
     for cz in cluster_sizes:
+        print "generating language vector of cluster size", cz
         # which alphabet to use
-        lang_vector = random_idx.generate_RI_text(N, RI_letters, cz, ordered, "AliceInWonderland.txt", alph)
+        lang_vector = random_idx.generate_RI_text(N, RI_letters, cz, ordered, "preprocessed_texts/AliceInWonderland.txt", alph)
         total_lang += lang_vector
     return total_lang
-english_alphabet = "abcdefghijklmnopqrstuwxyz"
+
 RI_letters = gen_lets()
-lang_vector = create_lang_vec(cluster_sizes)
-single_letter_lang_vector = create_lang_vec([1])
-bigrams_lang_vector = create_lang_vec([2])
-up2_lang_vec = np.add(single_letter_lang_vector, bigrams_lang_vector)
-qu_vector = random_idx.generate_RI_str(N, RI_letters, 2, ordered, "qu", alph)
+
+# lang_vectors in sizes 1-8
+lang_vector_dict = {};
+for size in cluster_sizes:
+    lang_vector_dict[size] = create_lang_vec([size])
+
+up2_lang_vec = np.add(lang_vector_dict[1], lang_vector_dict[2])
+qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
 if __name__ == "__main__":
     """
@@ -50,21 +54,19 @@ if __name__ == "__main__":
     about 300 instances of "q".  I'd expect a dot product
     with the Q-vector to be around 3 million.
     """
-    for i in range(0,26):
-        result = np.dot(single_letter_lang_vector, RI_letters[i])
-        print "dot product of %s and %s-letter vector is %f" % (english_alphabet[i], english_alphabet[i], result) 
-        print "\n"
+    for i in range(26):
+        result = np.dot(lang_vector_dict[1], RI_letters[i])
+        print "dot product of single-letter vector and %s-vector is %f\n" % (alph[i], result) 
 
     """
     Then take the language vector representing the bigrams
     of Alice and compute its dot product with QU.  What do
     you get?  And what is this language vector's dot
     product with Q?
-    """
-    
-    result = np.dot(bigrams_lang_vector, qu_vector)
-    print "dot product of bigrams_lang_vector and qu is %f" % (result) 
-    print "\n"
+    """    
+    result = np.dot(lang_vector_dict[2], qu_vector)
+    print "dot product of bigrams vector and qu is %f\n" % (result) 
+
     """
     Next, add the two language vectors into a single vector
     that represents both individual letters and bigrams.
@@ -73,11 +75,9 @@ if __name__ == "__main__":
     """
     
     result = np.dot(up2_lang_vec, RI_letters[16])
-    print "dot product of up2_lang_vec and q is %f" % (result) 
-    print "\n"
+    print "dot product of up2_lang_vec and q is %f\n" % (result) 
     result = np.dot(up2_lang_vec, qu_vector)
-    print "dot product of up2_lang_vec and qu is %f" % (result) 
-    print "\n"
+    print "dot product of up2_lang_vec and qu is %f\n" % (result) 
 
     """
     One more set of tests: Take the language vector for
@@ -89,26 +89,22 @@ if __name__ == "__main__":
     vector that is the sum of the above two.
     """
     # assuming that shifting is rolling...
-    sQ = np.roll(list(RI_letters[16], 1)
-    bigrams_sQ = np.multiply(bigrams_lang_vector, sQ)
+    sQ = np.roll(RI_letters[16], 1)
+    bigrams_sQ = np.multiply(lang_vector_dict[2], sQ)
     # still need to compare to see which letter wins
-    for i in range(0,26):
+    for i in range(26):
         result = np.dot(RI_letters[i], bigrams_sQ)
-        print "dot product of bigrams_sQ and %s is %f" % (english_alphabet[i], result) 
-        print "\n"
+        print "dot product of bigrams_sQ and %s is %f\n" % (alph[i], result) 
 
-    single_sQ = np.multiply(single_letter_lang_vector, sQ)
-    for i in range(0,26):
+    single_sQ = np.multiply(lang_vector_dict[1], sQ)
+    for i in range(26):
         result = np.dot(RI_letters[i], single_sQ)
-        print "dot product of single_sQ and %s is %f" % (english_alphabet[i], result) 
-        print "\n"
+        print "dot product of single_sQ and %s is %f\n" % (alph[i], result) 
 
     up2_lang_vec_sQ = np.multiply(up2_lang_vec, sQ)
-    for i in range(0,26):
+    for i in range(26):
         result = np.dot(RI_letters[i], up2_lang_vec_sQ)
-        print "dot product of up2_lang_vec_sQ and %s is %f" % (english_alphabet[i], result) 
-        print "\n"
-
+        print "dot product of up2_lang_vec_sQ and %s is %f\n" % (alph[i], result) 
 
 
 
