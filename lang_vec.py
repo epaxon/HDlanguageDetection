@@ -31,12 +31,13 @@ def create_lang_vec(cluster_sizes, N=N, k=k):
 RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
 
 # lang_vectors in sizes 1-8
-lang_vector_dict = {};
+lang_vectors = []
 for size in cluster_sizes:
-    lang_vector_dict[size] = create_lang_vec([size])
+    lang_vectors.append(create_lang_vec([size]))
+lang_vectors.insert(0, np.zeros(1,N))
 
-up2_lang_vec = np.add(lang_vector_dict[1], lang_vector_dict[2])
-qu_vector = random_idx.generate_RI_str(N, RI_letters, 2, ordered, "qu", alph)
+up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
+qu_vector = random_idx.generate_RI_str(N, RI_letters, 2, ordered, "uq", alph)
 
 if __name__ == "__main__":
     """
@@ -48,7 +49,7 @@ if __name__ == "__main__":
     with the Q-vector to be around 3 million.
     """
     for i in range(26):
-        result = np.dot(lang_vector_dict[1], RI_letters[i])
+        result = np.dot(lang_vectors[1], RI_letters[i])
         print "dot product of single-letter vector and %s-vector is %d" % (alph[i], result) 
 
     """
@@ -57,7 +58,7 @@ if __name__ == "__main__":
     you get?  And what is this language vector's dot
     product with Q?
     """    
-    result = np.dot(lang_vector_dict[2], np.transpose(qu_vector))
+    result = np.dot(lang_vectors[2], np.transpose(qu_vector))
     print "dot product of bigrams vector and qu is %d" % (result) 
 
     """
@@ -83,13 +84,13 @@ if __name__ == "__main__":
     """
     # assuming that shifting is rolling...
     sQ = np.roll(RI_letters[16], 1)
-    bigrams_sQ = np.multiply(lang_vector_dict[2], sQ)
+    bigrams_sQ = np.multiply(lang_vectors[2], sQ)
     # still need to compare to see which letter wins
     for i in range(26):
         result = np.dot(RI_letters[i], bigrams_sQ)
         print "dot product of bigrams_sQ and %s is %d" % (alph[i], result) 
 
-    single_sQ = np.multiply(lang_vector_dict[1], sQ)
+    single_sQ = np.multiply(lang_vectors[1], sQ)
     for i in range(26):
         result = np.dot(RI_letters[i], single_sQ)
         print "dot product of single_sQ and %s is %d" % (alph[i], result) 
