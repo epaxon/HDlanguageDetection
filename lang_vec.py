@@ -34,7 +34,7 @@ RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
 lang_vectors = []
 for size in cluster_sizes:
     lang_vectors.append(create_lang_vec([size]))
-lang_vectors.insert(0, np.zeros(1,N))
+lang_vectors.insert(0, np.zeros((1,N)))
 
 up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
 qu_vector = random_idx.generate_RI_str(N, RI_letters, 2, ordered, "uq", alph)
