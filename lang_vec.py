@@ -30,36 +30,40 @@ def create_lang_vec(cluster_sizes, N=N, k=k):
         total_lang += lang_vector
     return total_lang
 
-RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
+# RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
 
 # lang_vectors in sizes 1-8
-lang_vectors = []
-for size in cluster_sizes:
-    lang_vectors.append(create_lang_vec([size]))
-lang_vectors.insert(0, np.zeros((1,N)))
-
-up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
-qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
+# lang_vectors = []
+# for size in cluster_sizes:
+#     lang_vectors.append(create_lang_vec([size]))
+# lang_vectors.insert(0, np.zeros((1,N)))
 
 # save vectors to file
 #np.savetxt('alice_RI_letters.txt', RI_letters, '%d')
 #np.savetxt('alice_lang_vectors.txt', lang_vectors, '%f')
-fwrite = open("alice_RI_letters", "w")
-fwrite1 = open("alice_lang_vectors", "w")
-pickle.dump(RI_letters, fwrite)
-pickle.dump(lang_vectors, fwrite1)
-fwrite.close()
-fwrite1.close()
+# fwrite = open("alice_RI_letters", "w")
+# fwrite1 = open("alice_lang_vectors", "w")
+# pickle.dump(RI_letters, fwrite)
+# pickle.dump(lang_vectors, fwrite1)
+# fwrite.close()
+# fwrite1.close()
 
 #read from serialized files
-#fread = open("alice_RI_letters", "r")
-#fread1 = open("alice_lang_vectors", "r")
-#RI_letters = pickle.load(fread)
-#lang_vectors = pickle.load(fread1)
-#fread.close()
-#fread1.close()
+fread = open("alice_RI_letters", "r")
+fread1 = open("alice_lang_vectors", "r")
+RI_letters = pickle.load(fread)
+lang_vectors = pickle.load(fread1)
+fread.close()
+fread1.close()
+
+up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
+qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
 if __name__ == "__main__":
+
+    up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
+    qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
+
     """
     Take the language vector representing single letters of
     Alice and compute its dot product with the 26 different
@@ -71,6 +75,7 @@ if __name__ == "__main__":
     for i in range(26):
         result = np.dot(lang_vectors[1], RI_letters[i])
         print "dot product of single-letter vector and %s-vector is %d" % (alph[i], result) 
+    print ""
 
     """
     Then take the language vector representing the bigrams
@@ -79,7 +84,7 @@ if __name__ == "__main__":
     product with Q?
     """    
     result = np.dot(lang_vectors[2], np.transpose(qu_vector))
-    print "dot product of bigrams vector and qu is %d" % (result) 
+    print "dot product of bigrams vector and qu is %d\n" % (result) 
 
     """
     Next, add the two language vectors into a single vector
@@ -89,9 +94,9 @@ if __name__ == "__main__":
     """
     
     result = np.dot(up2_lang_vec, RI_letters[alph.find("q")])
-    print "dot product of up2_lang_vec and q is %d" % (result) 
+    print "dot product of up2_lang_vec and q is %d\n" % (result) 
     result = np.dot(up2_lang_vec, np.transpose(qu_vector))
-    print "dot product of up2_lang_vec and qu is %d" % (result) 
+    print "dot product of up2_lang_vec and qu is %d\n" % (result) 
 
     """
     One more set of tests: Take the language vector for
@@ -109,16 +114,19 @@ if __name__ == "__main__":
     for i in range(26):
         result = np.dot(RI_letters[i], np.transpose(bigrams_sQ))
         print "dot product of bigrams_sQ and %s is %d" % (alph[i], result) 
+    print ""
 
     single_sQ = np.multiply(lang_vectors[1], sQ)
     for i in range(26):
         result = np.dot(RI_letters[i], np.transpose(single_sQ))
         print "dot product of single_sQ and %s is %d" % (alph[i], result) 
+    print ""
 
     up2_lang_vec_sQ = np.multiply(up2_lang_vec, sQ)
     for i in range(26):
         result = np.dot(RI_letters[i], np.transpose(up2_lang_vec_sQ))
-        print "dot product of up2_lang_vec_sQ and %s is %d" % (alph[i], result) 
+        print "dot product of up2_lang_vec_sQ and %s is %d" % (alph[i], result)
+    print ""
 
 
 

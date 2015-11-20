@@ -1,0 +1,115 @@
+2015-11-20 00:08
+dot product of single-letter vector and a-vector is 98613452
+dot product of single-letter vector and b-vector is 15742048
+dot product of single-letter vector and c-vector is 29912280
+dot product of single-letter vector and d-vector is 59165972
+dot product of single-letter vector and e-vector is 151407396
+dot product of single-letter vector and f-vector is 19606748
+dot product of single-letter vector and g-vector is 32807556
+dot product of single-letter vector and h-vector is 81701504
+dot product of single-letter vector and i-vector is 81483888
+dot product of single-letter vector and j-vector is 2524604
+dot product of single-letter vector and k-vector is 12610960
+dot product of single-letter vector and l-vector is 48213856
+dot product of single-letter vector and m-vector is 26246656
+dot product of single-letter vector and n-vector is 76568408
+dot product of single-letter vector and o-vector is 95586260
+dot product of single-letter vector and p-vector is 13673820
+dot product of single-letter vector and q-vector is 3485012
+dot product of single-letter vector and r-vector is 63146244
+dot product of single-letter vector and s-vector is 68546732
+dot product of single-letter vector and t-vector is 117519892
+dot product of single-letter vector and u-vector is 42921608
+dot product of single-letter vector and v-vector is 11612956
+dot product of single-letter vector and w-vector is 25008948
+dot product of single-letter vector and x-vector is 5351724
+dot product of single-letter vector and y-vector is 25883620
+dot product of single-letter vector and z-vector is 1510616
+
+dot product of bigrams vector and qu is -7924
+
+dot product of up2_lang_vec and q is 3472592
+
+dot product of up2_lang_vec and qu is 1434872
+
+dot product of bigrams_sQ and a is -31528
+dot product of bigrams_sQ and b is -30764
+dot product of bigrams_sQ and c is -31472
+dot product of bigrams_sQ and d is -15216
+dot product of bigrams_sQ and e is 22776
+dot product of bigrams_sQ and f is -8556
+dot product of bigrams_sQ and g is -12364
+dot product of bigrams_sQ and h is 6940
+dot product of bigrams_sQ and i is 55852
+dot product of bigrams_sQ and j is -11228
+dot product of bigrams_sQ and k is -42584
+dot product of bigrams_sQ and l is 24304
+dot product of bigrams_sQ and m is -58704
+dot product of bigrams_sQ and n is -1556
+dot product of bigrams_sQ and o is -15552
+dot product of bigrams_sQ and p is 6596
+dot product of bigrams_sQ and q is -11180
+dot product of bigrams_sQ and r is -4692
+dot product of bigrams_sQ and s is 18756
+dot product of bigrams_sQ and t is 7776
+dot product of bigrams_sQ and u is -7924
+dot product of bigrams_sQ and v is -34060
+dot product of bigrams_sQ and w is -43048
+dot product of bigrams_sQ and x is -8588
+dot product of bigrams_sQ and y is -17416
+dot product of bigrams_sQ and z is -9812
+
+dot product of single_sQ and a is 884112
+dot product of single_sQ and b is -939148
+dot product of single_sQ and c is -5299828
+dot product of single_sQ and d is 612216
+dot product of single_sQ and e is 2085320
+dot product of single_sQ and f is 170696
+dot product of single_sQ and g is -86512
+dot product of single_sQ and h is 4981940
+dot product of single_sQ and i is 4242580
+dot product of single_sQ and j is -5028440
+dot product of single_sQ and k is 1352316
+dot product of single_sQ and l is -4237996
+dot product of single_sQ and m is 2259556
+dot product of single_sQ and n is 1897700
+dot product of single_sQ and o is 2525712
+dot product of single_sQ and p is -4211440
+dot product of single_sQ and q is -2508048
+dot product of single_sQ and r is 973792
+dot product of single_sQ and s is 2348896
+dot product of single_sQ and t is 674224
+dot product of single_sQ and u is 1442796
+dot product of single_sQ and v is -2814736
+dot product of single_sQ and w is -6691168
+dot product of single_sQ and x is 1913760
+dot product of single_sQ and y is -1926528
+dot product of single_sQ and z is 196372
+
+dot product of up2_lang_vec_sQ and a is 852584
+dot product of up2_lang_vec_sQ and b is -969912
+dot product of up2_lang_vec_sQ and c is -5331300
+dot product of up2_lang_vec_sQ and d is 597000
+dot product of up2_lang_vec_sQ and e is 2108096
+dot product of up2_lang_vec_sQ and f is 162140
+dot product of up2_lang_vec_sQ and g is -98876
+dot product of up2_lang_vec_sQ and h is 4988880
+dot product of up2_lang_vec_sQ and i is 4298432
+dot product of up2_lang_vec_sQ and j is -5039668
+dot product of up2_lang_vec_sQ and k is 1309732
+dot product of up2_lang_vec_sQ and l is -4213692
+dot product of up2_lang_vec_sQ and m is 2200852
+dot product of up2_lang_vec_sQ and n is 1896144
+dot product of up2_lang_vec_sQ and o is 2510160
+dot product of up2_lang_vec_sQ and p is -4204844
+dot product of up2_lang_vec_sQ and q is -2519228
+dot product of up2_lang_vec_sQ and r is 969100
+dot product of up2_lang_vec_sQ and s is 2367652
+dot product of up2_lang_vec_sQ and t is 682000
+dot product of up2_lang_vec_sQ and u is 1434872
+dot product of up2_lang_vec_sQ and v is -2848796
+dot product of up2_lang_vec_sQ and w is -6734216
+dot product of up2_lang_vec_sQ and x is 1905172
+dot product of up2_lang_vec_sQ and y is -1943944
+dot product of up2_lang_vec_sQ and z is 186560
+
