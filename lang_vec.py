@@ -4,6 +4,8 @@ import numpy as np
 import string
 import pandas as pd
 import matplotlib.pyplot as plt
+import pickle
+import sys
 
 k = 5000
 N = 10000
@@ -38,6 +40,24 @@ lang_vectors.insert(0, np.zeros((1,N)))
 
 up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
 qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
+
+# save vectors to file
+#np.savetxt('alice_RI_letters.txt', RI_letters, '%d')
+#np.savetxt('alice_lang_vectors.txt', lang_vectors, '%f')
+fwrite = open("alice_RI_letters", "w")
+fwrite1 = open("alice_lang_vectors", "w")
+pickle.dump(RI_letters, fwrite)
+pickle.dump(lang_vectors, fwrite1)
+fwrite.close()
+fwrite1.close()
+
+#read from serialized files
+#fread = open("alice_RI_letters", "r")
+#fread1 = open("alice_lang_vectors", "r")
+#RI_letters = pickle.load(fread)
+#lang_vectors = pickle.load(fread1)
+#fread.close()
+#fread1.close()
 
 if __name__ == "__main__":
     """
