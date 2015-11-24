@@ -57,6 +57,7 @@ fread.close()
 fread1.close()
 
 up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
+up3_lang_vec = np.add(up2_lang_vec, lang_vectors[3])
 qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
 if __name__ == "__main__":
@@ -128,12 +129,66 @@ if __name__ == "__main__":
         print "dot product of up2_lang_vec_sQ and %s is %d" % (alph[i], result)
     print ""
 
+    """
+    So try this: make a language vector of bigrams only.
+    If you test it with (calculate its dot produce with)
+    the letter vectors, you should get numbers like those
+    in the second block of "results.txt" that starts with
 
+    dot product of bigrams_sQ and a is -31528
 
+    Some are positive, some negative, and none is in the
+    hundreds of thousands.  All that is "noise" in
+    signal-processing terms.  But if you test it with the
+    vector for QU (which equals sQ * U) or with any other
+    bigram vector, you should get that bigram's frequency
+    times 10K.  That's referred to as "signal."
+    """
+    for i in range(26):
+        result = np.dot(lang_vectors[2], RI_letters[i])
+        print "dot product of bigrams vector and %s-vector is %d" % (alph[i], result) 
+    print ""
 
+    """
+    Now it gets more subtle and interesting.  Take the
+    language vector for bigrams and MULTIPLY it
+    (coordinate-wise) with Q that has been rotated once
+    (i.e., multiply it with sQ) and then test the result
+    with the letter vectors.  The dot product should be
+    high for U only.  Can you figure out the reason why,
+    do you see what's happening?
+    """
+    bigrams_sQ = np.multiply(lang_vectors[2], single_sQ)
+    for i in range(26):
+        result = np.dot(bigrams_sQ, RI_letters[i])
+        print "dot product of bigrams_sQ vector and %s-vector is %d" % (alph[i], result) 
+    print ""
 
+    """
+    After you have gotten this far, make a language vector
+    that combines individual letters, bigrams and trigrams:
+    just add those three language vectors into a single
+    vector (by normal vector addition.).  Then test it for
+    single letters and bigrams as above.  Also, multiply it
+    with sQ and test the result as above.  The dot products
+    should be close to what you got before.
+    """
+    for i in range(26):
+        result = np.dot(up3_lang_vec, RI_letters[i])
+        print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
+    print ""
 
+    result = np.dot(up3_lang_vec, lang_vectors[2])
+    print "dot product of up3_lang_vec vector and bigrams vector is %d" % (result)
+    
+    up3_lang_vec_sQ = np.multiply(up3_lang_vec, single_sQ)
+    for i in range(26):
+        result = np.dot(up3_lang_vec_sQ, RI_letters[i])
+        print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
+    print ""
 
+    result = np.dot(up3_lang_vec_sQ, lang_vectors[2])
+    print "dot product of up3_lang_vec vector_sQ and bigrams vector is %d" % (result)
 
 
 
