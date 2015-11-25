@@ -1,4 +1,4 @@
-2015-11-20 00:08
+2015-11-24 23:28
 dot product of single-letter vector and a-vector is 98613452
 dot product of single-letter vector and b-vector is 15742048
 dot product of single-letter vector and c-vector is 29912280
@@ -113,3 +113,114 @@ dot product of up2_lang_vec_sQ and x is 1905172
 dot product of up2_lang_vec_sQ and y is -1943944
 dot product of up2_lang_vec_sQ and z is 186560
 
+dot product of bigrams vector and a-vector is 42676
+dot product of bigrams vector and b-vector is -12220
+dot product of bigrams vector and c-vector is -1328
+dot product of bigrams vector and d-vector is 48028
+dot product of bigrams vector and e-vector is 8428
+dot product of bigrams vector and f-vector is -47556
+dot product of bigrams vector and g-vector is -33692
+dot product of bigrams vector and h-vector is -12440
+dot product of bigrams vector and i-vector is -51880
+dot product of bigrams vector and j-vector is -16216
+dot product of bigrams vector and k-vector is -40316
+dot product of bigrams vector and l-vector is 63920
+dot product of bigrams vector and m-vector is -46424
+dot product of bigrams vector and n-vector is 42932
+dot product of bigrams vector and o-vector is -25864
+dot product of bigrams vector and p-vector is -56616
+dot product of bigrams vector and q-vector is -12420
+dot product of bigrams vector and r-vector is -2620
+dot product of bigrams vector and s-vector is -75824
+dot product of bigrams vector and t-vector is -24860
+dot product of bigrams vector and u-vector is -4164
+dot product of bigrams vector and v-vector is 34708
+dot product of bigrams vector and w-vector is -7644
+dot product of bigrams vector and x-vector is -1540
+dot product of bigrams vector and y-vector is 28328
+dot product of bigrams vector and z-vector is -6124
+
+dot product of bigrams_sQ vector and a-vector is 49304392
+dot product of bigrams_sQ vector and b-vector is 748260596
+dot product of bigrams_sQ vector and c-vector is 195206588
+dot product of bigrams_sQ vector and d-vector is 760595688
+dot product of bigrams_sQ vector and e-vector is 802559272
+dot product of bigrams_sQ vector and f-vector is -895411120
+dot product of bigrams_sQ vector and g-vector is 357181384
+dot product of bigrams_sQ vector and h-vector is 51121892
+dot product of bigrams_sQ vector and i-vector is 577138052
+dot product of bigrams_sQ vector and j-vector is -2227639096
+dot product of bigrams_sQ vector and k-vector is 1241814548
+dot product of bigrams_sQ vector and l-vector is 682456436
+dot product of bigrams_sQ vector and m-vector is 1508447828
+dot product of bigrams_sQ vector and n-vector is -1943141564
+dot product of bigrams_sQ vector and o-vector is -808511208
+dot product of bigrams_sQ vector and p-vector is 1046099528
+dot product of bigrams_sQ vector and q-vector is -582483944
+dot product of bigrams_sQ vector and r-vector is -1375279976
+dot product of bigrams_sQ vector and s-vector is -2069577104
+dot product of bigrams_sQ vector and t-vector is 246846864
+dot product of bigrams_sQ vector and u-vector is -1263289116
+dot product of bigrams_sQ vector and v-vector is -644636304
+dot product of bigrams_sQ vector and w-vector is 994103736
+dot product of bigrams_sQ vector and x-vector is 257013904
+dot product of bigrams_sQ vector and y-vector is -8119600
+dot product of bigrams_sQ vector and z-vector is 638702172
+
+dot product of up3_lang_vec vector and a-vector is 98671184
+dot product of up3_lang_vec vector and b-vector is 15792708
+dot product of up3_lang_vec vector and c-vector is 29875044
+dot product of up3_lang_vec vector and d-vector is 59215520
+dot product of up3_lang_vec vector and e-vector is 151363148
+dot product of up3_lang_vec vector and f-vector is 19549152
+dot product of up3_lang_vec vector and g-vector is 32768620
+dot product of up3_lang_vec vector and h-vector is 81695448
+dot product of up3_lang_vec vector and i-vector is 81460588
+dot product of up3_lang_vec vector and j-vector is 2449528
+dot product of up3_lang_vec vector and k-vector is 12524040
+dot product of up3_lang_vec vector and l-vector is 48216820
+dot product of up3_lang_vec vector and m-vector is 26251640
+dot product of up3_lang_vec vector and n-vector is 76580008
+dot product of up3_lang_vec vector and o-vector is 95572372
+dot product of up3_lang_vec vector and p-vector is 13652564
+dot product of up3_lang_vec vector and q-vector is 3549752
+dot product of up3_lang_vec vector and r-vector is 63144296
+dot product of up3_lang_vec vector and s-vector is 68543484
+dot product of up3_lang_vec vector and t-vector is 117517472
+dot product of up3_lang_vec vector and u-vector is 42954044
+dot product of up3_lang_vec vector and v-vector is 11657112
+dot product of up3_lang_vec vector and w-vector is 25024496
+dot product of up3_lang_vec vector and x-vector is 5306260
+dot product of up3_lang_vec vector and y-vector is 25952416
+dot product of up3_lang_vec vector and z-vector is 1481176
+
+dot product of up3_lang_vec vector and bigrams vector is 651708796
+
+dot product of up3_lang_vec vector and a-vector is 77866032384
+dot product of up3_lang_vec vector and b-vector is 25038322420
+dot product of up3_lang_vec vector and c-vector is 236596659532
+dot product of up3_lang_vec vector and d-vector is 180840931952
+dot product of up3_lang_vec vector and e-vector is 259197848712
+dot product of up3_lang_vec vector and f-vector is 64162616392
+dot product of up3_lang_vec vector and g-vector is -20838216760
+dot product of up3_lang_vec vector and h-vector is 219752695268
+dot product of up3_lang_vec vector and i-vector is 149410478876
+dot product of up3_lang_vec vector and j-vector is -362566580680
+dot product of up3_lang_vec vector and k-vector is -100277225060
+dot product of up3_lang_vec vector and l-vector is 75016707292
+dot product of up3_lang_vec vector and m-vector is 176924106108
+dot product of up3_lang_vec vector and n-vector is 81919092308
+dot product of up3_lang_vec vector and o-vector is 96428664400
+dot product of up3_lang_vec vector and p-vector is 257381771520
+dot product of up3_lang_vec vector and q-vector is 58580474688
+dot product of up3_lang_vec vector and r-vector is 191260186504
+dot product of up3_lang_vec vector and s-vector is -36981065088
+dot product of up3_lang_vec vector and t-vector is 258286325640
+dot product of up3_lang_vec vector and u-vector is -67832638924
+dot product of up3_lang_vec vector and v-vector is -35823190656
+dot product of up3_lang_vec vector and w-vector is -186165359328
+dot product of up3_lang_vec vector and x-vector is -159464300016
+dot product of up3_lang_vec vector and y-vector is 198778596432
+dot product of up3_lang_vec vector and z-vector is 144537398636
+
+dot product of up3_lang_vec_sQ and bigrams vector is -13756568911756

@@ -178,28 +178,18 @@ if __name__ == "__main__":
         print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
-    temp = np.transpose(up3_lang_vec)
-    print(temp)
-    print(lang_vectors[2])
-    result = np.dot(temp, lang_vectors[2])
-    print(result)
-    #    up2_lang_vec_sQ = np.multiply(up2_lang_vec, sQ)
-    #for i in range(26):
-    #    result = np.dot(RI_letters[i], np.transpose(up2_lang_vec_sQ))
-
-
+    #idk why the vectors are nested in lists
+    result = np.dot(np.transpose(up3_lang_vec[0]), lang_vectors[2][0])
     print "dot product of up3_lang_vec vector and bigrams vector is %d" % (result)
-    
+    print ""
+
     up3_lang_vec_sQ = np.multiply(up3_lang_vec, single_sQ)
     for i in range(26):
         result = np.dot(up3_lang_vec_sQ, RI_letters[i])
         print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
-    result = np.dot(up3_lang_vec_sQ, lang_vectors[2])
-    print "dot product of up3_lang_vec vector_sQ and bigrams vector is %d" % (result)
-
-
-
+    result = np.dot(np.transpose(up3_lang_vec_sQ[0]), lang_vectors[2][0])
+    print "dot product of up3_lang_vec_sQ and bigrams vector is %d" % (result)
 
 
