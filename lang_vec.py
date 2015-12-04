@@ -162,4 +162,17 @@ if __name__ == "__main__":
     result = np.dot(up3_lang_vec_sQ, np.transpose(lang_vectors[2]))
     print "dot product of up3_lang_vec_sQ and bigrams vector is %d" % (result)
 
+    print "What is the dot product of the\n\
+    single-letter language vector with itself?  What is the\n\
+    dot product of the bigrams vector with itself?  What is\n\
+    the dot product of the bigrams vector with the sum of\n\
+    the the single-letter vector and the bigrams vector?\n\
+    All should be around 1.2 billion, I think.\n\
+    Some of the dot products with letter vectors are very\n\
+    large negative (-362566580680).  You could be\n\
+    multiplying vectors when you should be adding them.\n"
+    for i in range(26):
+        result = np.dot(RI_letters[i], RI_letters[i])
+        print "dot product of %s-vector and %s-vector is %d" % (alph[i], alph[i], result) 
+    print ""
 
