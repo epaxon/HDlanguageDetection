@@ -65,49 +65,43 @@ if __name__ == "__main__":
     up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
     qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
-    """
-    Take the language vector representing single letters of
-    Alice and compute its dot product with the 26 different
-    letter vectors.  Can you see a relation between the dot
-    products and the letter counts in Alice?  Alice has
-    about 300 instances of "q".  I'd expect a dot product
-    with the Q-vector to be around 3 million.
-    """
+    print "Take the language vector representing single letters of\n\
+    Alice and compute its dot product with the 26 different\n\
+    letter vectors.  Can you see a relation between the dot\n\
+    products and the letter counts in Alice?  Alice has\n\
+    about 300 instances of 'q'.  I'd expect a dot product\n\
+    with the Q-vector to be around 3 million.\n"
     for i in range(26):
         result = np.dot(lang_vectors[1], RI_letters[i])
         print "dot product of single-letter vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
-    """
-    Then take the language vector representing the bigrams
-    of Alice and compute its dot product with QU.  What do
-    you get?  And what is this language vector's dot
-    product with Q?
-    """    
+    print "Then take the language vector representing the bigrams\n\
+    of Alice and compute its dot product with QU.  What do\n\
+    you get?  And what is this language vector's dot\n\
+    product with Q?\n"
+    
     result = np.dot(lang_vectors[2], np.transpose(qu_vector))
     print "dot product of bigrams vector and qu is %d\n" % (result) 
 
-    """
-    Next, add the two language vectors into a single vector
-    that represents both individual letters and bigrams.
-    Compute its dot product with Q and with QU.  What do
-    you get?
-    """
+    print "Next, add the two language vectors into a single vector\n\
+    that represents both individual letters and bigrams.\n\
+    Compute its dot product with Q and with QU.  What do\n\
+    you get?\n"
     
     result = np.dot(up2_lang_vec, RI_letters[alph.find("q")])
     print "dot product of up2_lang_vec and q is %d\n" % (result) 
     result = np.dot(up2_lang_vec, np.transpose(qu_vector))
     print "dot product of up2_lang_vec and qu is %d\n" % (result) 
 
-    """
-    One more set of tests: Take the language vector for
-    bigrams and (pointwise) multiply it with sQ (Q shifted
-    once).  Compare the resulting vector (with dot product
-    or cosine) to the letter vectors A, B, C, ....  Which
-    letter wins?  Do the same using the language vector for
-    individual letters, and once more using a language
-    vector that is the sum of the above two.
-    """
+    print "One more set of tests: Take the language vector for\n\
+    bigrams and (pointwise) multiply it with sQ (Q shifted\n\
+    once).  Compare the resulting vector (with dot product\n\
+    or cosine) to the letter vectors A, B, C, ....  Which\n\
+    letter wins?  Do the same using the language vector for\n\
+    individual letters, and once more using a language\n\
+    vector that is the sum of the above two.\n"
+    
     # assuming that shifting is rolling...
     sQ = np.roll(RI_letters[alph.find("q")], 1)
     bigrams_sQ = np.multiply(lang_vectors[2], sQ)
@@ -129,50 +123,32 @@ if __name__ == "__main__":
         print "dot product of up2_lang_vec_sQ and %s is %d" % (alph[i], result)
     print ""
 
-    """
-    So try this: make a language vector of bigrams only.
-    If you test it with (calculate its dot produce with)
-    the letter vectors, you should get numbers like those
-    in the second block of "results.txt" that starts with
-
-    dot product of bigrams_sQ and a is -31528
-
-    Some are positive, some negative, and none is in the
-    hundreds of thousands.  All that is "noise" in
-    signal-processing terms.  But if you test it with the
-    vector for QU (which equals sQ * U) or with any other
-    bigram vector, you should get that bigram's frequency
-    times 10K.  That's referred to as "signal."
-    """
+    print "So try this: make a language vector of bigrams only.\n\
+    If you test it with (calculate its dot produce with)\n\
+    the letter vectors, you should get numbers like those\n\
+    in the second block of 'results.txt' that starts with\n\
+    dot product of bigrams_sQ and a is -31528\n\
+    Some are positive, some negative, and none is in the\n\
+    hundreds of thousands.  All that is 'noise' in\n\
+    signal-processing terms.  But if you test it with the\n\
+    vector for QU (which equals sQ * U) or with any other\n\
+    bigram vector, you should get that bigram's frequency\n\
+    times 10K.  That's referred to as signal.\n"
+    
     for i in range(26):
         result = np.dot(lang_vectors[2], RI_letters[i])
         print "dot product of bigrams vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
-    """
-    Now it gets more subtle and interesting.  Take the
-    language vector for bigrams and MULTIPLY it
-    (coordinate-wise) with Q that has been rotated once
-    (i.e., multiply it with sQ) and then test the result
-    with the letter vectors.  The dot product should be
-    high for U only.  Can you figure out the reason why,
-    do you see what's happening?
-    """
-    bigrams_sQ = np.multiply(lang_vectors[2], single_sQ)
-    for i in range(26):
-        result = np.dot(bigrams_sQ, RI_letters[i])
-        print "dot product of bigrams_sQ vector and %s-vector is %d" % (alph[i], result) 
-    print ""
 
-    """
-    After you have gotten this far, make a language vector
-    that combines individual letters, bigrams and trigrams:
-    just add those three language vectors into a single
-    vector (by normal vector addition.).  Then test it for
-    single letters and bigrams as above.  Also, multiply it
-    with sQ and test the result as above.  The dot products
-    should be close to what you got before.
-    """
+    print "After you have gotten this far, make a language vector\n\
+    that combines individual letters, bigrams and trigrams:\n\
+    just add those three language vectors into a single\n\
+    vector (by normal vector addition.).  Then test it for\n\
+    single letters and bigrams as above.  Also, multiply it\n\
+    with sQ and test the result as above.  The dot products\n\
+    should be close to what you got before.\n"
+    
     for i in range(26):
         result = np.dot(up3_lang_vec, RI_letters[i])
         print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
@@ -186,7 +162,7 @@ if __name__ == "__main__":
     up3_lang_vec_sQ = np.multiply(up3_lang_vec, single_sQ)
     for i in range(26):
         result = np.dot(up3_lang_vec_sQ, RI_letters[i])
-        print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
+        print "dot product of up3_lang_vec_sQ vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
     result = np.dot(np.transpose(up3_lang_vec_sQ[0]), lang_vectors[2][0])
