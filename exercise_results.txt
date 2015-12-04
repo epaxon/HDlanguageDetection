@@ -1,4 +1,9 @@
-2015-11-24 23:28
+Take the language vector representing single letters of
+    Alice and compute its dot product with the 26 different
+    letter vectors.  Can you see a relation between the dot
+    products and the letter counts in Alice?  Alice has
+    about 300 instances of 'q'.  I'd expect a dot product
+    with the Q-vector to be around 3 million.
 dot product of single-letter vector and a-vector is 98613452
 dot product of single-letter vector and b-vector is 15742048
 dot product of single-letter vector and c-vector is 29912280
@@ -26,12 +31,24 @@ dot product of single-letter vector and x-vector is 5351724
 dot product of single-letter vector and y-vector is 25883620
 dot product of single-letter vector and z-vector is 1510616
 
+Then take the language vector representing the bigrams
+    of Alice and compute its dot product with QU.  What do
+    you get?  And what is this language vector's dot
+    product with Q?
 dot product of bigrams vector and qu is -7924
-
+Next, add the two language vectors into a single vector
+    that represents both individual letters and bigrams.
+    Compute its dot product with Q and with QU.  What do
+    you get?
 dot product of up2_lang_vec and q is 3472592
-
 dot product of up2_lang_vec and qu is 1434872
-
+One more set of tests: Take the language vector for
+    bigrams and (pointwise) multiply it with sQ (Q shifted
+    once).  Compare the resulting vector (with dot product
+    or cosine) to the letter vectors A, B, C, ....  Which
+    letter wins?  Do the same using the language vector for
+    individual letters, and once more using a language
+    vector that is the sum of the above two.
 dot product of bigrams_sQ and a is -31528
 dot product of bigrams_sQ and b is -30764
 dot product of bigrams_sQ and c is -31472
@@ -58,7 +75,6 @@ dot product of bigrams_sQ and w is -43048
 dot product of bigrams_sQ and x is -8588
 dot product of bigrams_sQ and y is -17416
 dot product of bigrams_sQ and z is -9812
-
 dot product of single_sQ and a is 884112
 dot product of single_sQ and b is -939148
 dot product of single_sQ and c is -5299828
@@ -85,7 +101,6 @@ dot product of single_sQ and w is -6691168
 dot product of single_sQ and x is 1913760
 dot product of single_sQ and y is -1926528
 dot product of single_sQ and z is 196372
-
 dot product of up2_lang_vec_sQ and a is 852584
 dot product of up2_lang_vec_sQ and b is -969912
 dot product of up2_lang_vec_sQ and c is -5331300
@@ -112,7 +127,17 @@ dot product of up2_lang_vec_sQ and w is -6734216
 dot product of up2_lang_vec_sQ and x is 1905172
 dot product of up2_lang_vec_sQ and y is -1943944
 dot product of up2_lang_vec_sQ and z is 186560
-
+So try this: make a language vector of bigrams only.
+    If you test it with (calculate its dot produce with)
+    the letter vectors, you should get numbers like those
+    in the second block of 'results.txt' that starts with
+    dot product of bigrams_sQ and a is -31528
+    Some are positive, some negative, and none is in the
+    hundreds of thousands.  All that is 'noise' in
+    signal-processing terms.  But if you test it with the
+    vector for QU (which equals sQ * U) or with any other
+    bigram vector, you should get that bigram's frequency
+    times 10K.  That's referred to as signal.
 dot product of bigrams vector and a-vector is 42676
 dot product of bigrams vector and b-vector is -12220
 dot product of bigrams vector and c-vector is -1328
@@ -139,34 +164,13 @@ dot product of bigrams vector and w-vector is -7644
 dot product of bigrams vector and x-vector is -1540
 dot product of bigrams vector and y-vector is 28328
 dot product of bigrams vector and z-vector is -6124
-
-dot product of bigrams_sQ vector and a-vector is 49304392
-dot product of bigrams_sQ vector and b-vector is 748260596
-dot product of bigrams_sQ vector and c-vector is 195206588
-dot product of bigrams_sQ vector and d-vector is 760595688
-dot product of bigrams_sQ vector and e-vector is 802559272
-dot product of bigrams_sQ vector and f-vector is -895411120
-dot product of bigrams_sQ vector and g-vector is 357181384
-dot product of bigrams_sQ vector and h-vector is 51121892
-dot product of bigrams_sQ vector and i-vector is 577138052
-dot product of bigrams_sQ vector and j-vector is -2227639096
-dot product of bigrams_sQ vector and k-vector is 1241814548
-dot product of bigrams_sQ vector and l-vector is 682456436
-dot product of bigrams_sQ vector and m-vector is 1508447828
-dot product of bigrams_sQ vector and n-vector is -1943141564
-dot product of bigrams_sQ vector and o-vector is -808511208
-dot product of bigrams_sQ vector and p-vector is 1046099528
-dot product of bigrams_sQ vector and q-vector is -582483944
-dot product of bigrams_sQ vector and r-vector is -1375279976
-dot product of bigrams_sQ vector and s-vector is -2069577104
-dot product of bigrams_sQ vector and t-vector is 246846864
-dot product of bigrams_sQ vector and u-vector is -1263289116
-dot product of bigrams_sQ vector and v-vector is -644636304
-dot product of bigrams_sQ vector and w-vector is 994103736
-dot product of bigrams_sQ vector and x-vector is 257013904
-dot product of bigrams_sQ vector and y-vector is -8119600
-dot product of bigrams_sQ vector and z-vector is 638702172
-
+After you have gotten this far, make a language vector
+    that combines individual letters, bigrams and trigrams:
+    just add those three language vectors into a single
+    vector (by normal vector addition.).  Then test it for
+    single letters and bigrams as above.  Also, multiply it
+    with sQ and test the result as above.  The dot products
+    should be close to what you got before.
 dot product of up3_lang_vec vector and a-vector is 98671184
 dot product of up3_lang_vec vector and b-vector is 15792708
 dot product of up3_lang_vec vector and c-vector is 29875044
@@ -193,34 +197,94 @@ dot product of up3_lang_vec vector and w-vector is 25024496
 dot product of up3_lang_vec vector and x-vector is 5306260
 dot product of up3_lang_vec vector and y-vector is 25952416
 dot product of up3_lang_vec vector and z-vector is 1481176
-
 dot product of up3_lang_vec vector and bigrams vector is 651708796
+dot product of up3_lang_vec_sQ vector and a-vector is 862480
+dot product of up3_lang_vec_sQ vector and b-vector is -970600
+dot product of up3_lang_vec_sQ vector and c-vector is -5324536
+dot product of up3_lang_vec_sQ vector and d-vector is 498992
+dot product of up3_lang_vec_sQ vector and e-vector is 2049116
+dot product of up3_lang_vec_sQ vector and f-vector is 145164
+dot product of up3_lang_vec_sQ vector and g-vector is -51496
+dot product of up3_lang_vec_sQ vector and h-vector is 5010456
+dot product of up3_lang_vec_sQ vector and i-vector is 4270300
+dot product of up3_lang_vec_sQ vector and j-vector is -5075600
+dot product of up3_lang_vec_sQ vector and k-vector is 1318096
+dot product of up3_lang_vec_sQ vector and l-vector is -4153752
+dot product of up3_lang_vec_sQ vector and m-vector is 2242660
+dot product of up3_lang_vec_sQ vector and n-vector is 1915884
+dot product of up3_lang_vec_sQ vector and o-vector is 2563536
+dot product of up3_lang_vec_sQ vector and p-vector is -4186124
+dot product of up3_lang_vec_sQ vector and q-vector is -2460724
+dot product of up3_lang_vec_sQ vector and r-vector is 938788
+dot product of up3_lang_vec_sQ vector and s-vector is 2357652
+dot product of up3_lang_vec_sQ vector and t-vector is 653384
+dot product of up3_lang_vec_sQ vector and u-vector is 1463048
+dot product of up3_lang_vec_sQ vector and v-vector is -2852628
+dot product of up3_lang_vec_sQ vector and w-vector is -6715000
+dot product of up3_lang_vec_sQ vector and x-vector is 1865136
+dot product of up3_lang_vec_sQ vector and y-vector is -1971076
+dot product of up3_lang_vec_sQ vector and z-vector is 232076
 
-dot product of up3_lang_vec vector and a-vector is 77866032384
-dot product of up3_lang_vec vector and b-vector is 25038322420
-dot product of up3_lang_vec vector and c-vector is 236596659532
-dot product of up3_lang_vec vector and d-vector is 180840931952
-dot product of up3_lang_vec vector and e-vector is 259197848712
-dot product of up3_lang_vec vector and f-vector is 64162616392
-dot product of up3_lang_vec vector and g-vector is -20838216760
-dot product of up3_lang_vec vector and h-vector is 219752695268
-dot product of up3_lang_vec vector and i-vector is 149410478876
-dot product of up3_lang_vec vector and j-vector is -362566580680
-dot product of up3_lang_vec vector and k-vector is -100277225060
-dot product of up3_lang_vec vector and l-vector is 75016707292
-dot product of up3_lang_vec vector and m-vector is 176924106108
-dot product of up3_lang_vec vector and n-vector is 81919092308
-dot product of up3_lang_vec vector and o-vector is 96428664400
-dot product of up3_lang_vec vector and p-vector is 257381771520
-dot product of up3_lang_vec vector and q-vector is 58580474688
-dot product of up3_lang_vec vector and r-vector is 191260186504
-dot product of up3_lang_vec vector and s-vector is -36981065088
-dot product of up3_lang_vec vector and t-vector is 258286325640
-dot product of up3_lang_vec vector and u-vector is -67832638924
-dot product of up3_lang_vec vector and v-vector is -35823190656
-dot product of up3_lang_vec vector and w-vector is -186165359328
-dot product of up3_lang_vec vector and x-vector is -159464300016
-dot product of up3_lang_vec vector and y-vector is 198778596432
-dot product of up3_lang_vec vector and z-vector is 144537398636
+dot product of up3_lang_vec_sQ and bigrams vector is 754552
+What is the dot product of the
+    single-letter language vector with itself?  What is the
+    dot product of the bigrams vector with itself?  What is
+    the dot product of the bigrams vector with the sum of
+    the the single-letter vector and the bigrams vector?
+    All should be around 1.2 billion, I think.
+    Some of the dot products with letter vectors are very
+    large negative (-362566580680).  You could be
+    multiplying vectors when you should be adding them.
+dot product of a-vector and a-vector is 10000
+dot product of b-vector and b-vector is 10000
+dot product of c-vector and c-vector is 10000
+dot product of d-vector and d-vector is 10000
+dot product of e-vector and e-vector is 10000
+dot product of f-vector and f-vector is 10000
+dot product of g-vector and g-vector is 10000
+dot product of h-vector and h-vector is 10000
+dot product of i-vector and i-vector is 10000
+dot product of j-vector and j-vector is 10000
+dot product of k-vector and k-vector is 10000
+dot product of l-vector and l-vector is 10000
+dot product of m-vector and m-vector is 10000
+dot product of n-vector and n-vector is 10000
+dot product of o-vector and o-vector is 10000
+dot product of p-vector and p-vector is 10000
+dot product of q-vector and q-vector is 10000
+dot product of r-vector and r-vector is 10000
+dot product of s-vector and s-vector is 10000
+dot product of t-vector and t-vector is 10000
+dot product of u-vector and u-vector is 10000
+dot product of v-vector and v-vector is 10000
+dot product of w-vector and w-vector is 10000
+dot product of x-vector and x-vector is 10000
+dot product of y-vector and y-vector is 10000
+dot product of z-vector and z-vector is 10000
 
-dot product of up3_lang_vec_sQ and bigrams vector is -13756568911756
+dot product of bigrams vector with itself is 1227192552dot product of bigrams vector and sum_single_a_and_bigrams vector is 1227235228
+dot product of bigrams vector and sum_single_b_and_bigrams vector is 1227180332
+dot product of bigrams vector and sum_single_c_and_bigrams vector is 1227191224
+dot product of bigrams vector and sum_single_d_and_bigrams vector is 1227240580
+dot product of bigrams vector and sum_single_e_and_bigrams vector is 1227200980
+dot product of bigrams vector and sum_single_f_and_bigrams vector is 1227144996
+dot product of bigrams vector and sum_single_g_and_bigrams vector is 1227158860
+dot product of bigrams vector and sum_single_h_and_bigrams vector is 1227180112
+dot product of bigrams vector and sum_single_i_and_bigrams vector is 1227140672
+dot product of bigrams vector and sum_single_j_and_bigrams vector is 1227176336
+dot product of bigrams vector and sum_single_k_and_bigrams vector is 1227152236
+dot product of bigrams vector and sum_single_l_and_bigrams vector is 1227256472
+dot product of bigrams vector and sum_single_m_and_bigrams vector is 1227146128
+dot product of bigrams vector and sum_single_n_and_bigrams vector is 1227235484
+dot product of bigrams vector and sum_single_o_and_bigrams vector is 1227166688
+dot product of bigrams vector and sum_single_p_and_bigrams vector is 1227135936
+dot product of bigrams vector and sum_single_q_and_bigrams vector is 1227180132
+dot product of bigrams vector and sum_single_r_and_bigrams vector is 1227189932
+dot product of bigrams vector and sum_single_s_and_bigrams vector is 1227116728
+dot product of bigrams vector and sum_single_t_and_bigrams vector is 1227167692
+dot product of bigrams vector and sum_single_u_and_bigrams vector is 1227188388
+dot product of bigrams vector and sum_single_v_and_bigrams vector is 1227227260
+dot product of bigrams vector and sum_single_w_and_bigrams vector is 1227184908
+dot product of bigrams vector and sum_single_x_and_bigrams vector is 1227191012
+dot product of bigrams vector and sum_single_y_and_bigrams vector is 1227220880
+dot product of bigrams vector and sum_single_z_and_bigrams vector is 1227186428
