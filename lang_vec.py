@@ -164,9 +164,6 @@ if __name__ == "__main__":
     Some of the dot products with letter vectors are very\n\
     large negative (-362566580680).  You could be\n\
     multiplying vectors when you should be adding them.\n")
-    #for i in range(26):
-    #    result = np.dot(RI_letters[i], np.transpose(RI_letters[i]))
-    #    f.write("dot product of %s-vector and %s-vector is %d\n" % (alph[i], alph[i], result))
 
     result = np.dot(lang_vectors[1], np.transpose(lang_vectors[1]))
     f.write("\ndot product of single letter vector with itself is %d\n" % (result)) 
@@ -174,8 +171,8 @@ if __name__ == "__main__":
     result = np.dot(lang_vectors[2], np.transpose(lang_vectors[2]))
     f.write("\ndot product of bigrams vector with itself is %d\n" % (result)) 
 
-    sum_single_letter_and_bigrams = np.add(lang_vectors[1], lang_vectors[2])
-    result = np.dot(sum_single_letter_and_bigrams, np.transpose(lang_vectors[2]))
+    result = np.dot(up2_lang_vec, np.transpose(lang_vectors[2]))
     f.write("dot product of bigrams vector and sum_single_letter_and_bigrams vector is %d\n" % (result))
+
     f.close()
     
