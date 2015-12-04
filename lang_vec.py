@@ -172,7 +172,14 @@ if __name__ == "__main__":
     large negative (-362566580680).  You could be\n\
     multiplying vectors when you should be adding them.\n"
     for i in range(26):
-        result = np.dot(RI_letters[i], RI_letters[i])
+        result = np.dot(RI_letters[i], np.transpose(RI_letters[i]))
         print "dot product of %s-vector and %s-vector is %d" % (alph[i], alph[i], result) 
     print ""
-
+    result = np.dot(lang_vectors[2], np.transpose(lang_vectors[2]))
+    print "dot product of bigrams vector with itself is %d" % (result) 
+    for i in range(26):
+        sum_single_letter_and_bigrams = np.add(RI_letters[i], lang_vectors[2])
+        result = np.dot(sum_single_letter_and_bigrams, np.transpose(lang_vectors[2]))
+        print "dot product of bigrams vector and sum_single_%s_and_bigrams vector is %d" % (alph[i], result) 
+    print ""
+    
