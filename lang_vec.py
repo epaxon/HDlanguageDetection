@@ -30,6 +30,7 @@ def create_lang_vec(cluster_sizes, N=N, k=k):
         total_lang += lang_vector
     return total_lang
 
+
 # RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
 
 # lang_vectors in sizes 1-8
@@ -77,7 +78,11 @@ if __name__ == "__main__":
     of Alice and compute its dot product with QU.  What do\n\
     you get?  And what is this language vector's dot\n\
     product with Q?\n")
-    
+
+    print RI_letters[alph.find("q")]
+    print qu_vector
+    print lang_vectors[1]
+    print lang_vectors[2]
     result = np.dot(lang_vectors[2], np.transpose(qu_vector))
     f.write("dot product of bigrams vector and qu is %d\n" % (result))
 
@@ -172,7 +177,7 @@ if __name__ == "__main__":
     f.write("\ndot product of bigrams vector with itself is %d\n" % (result)) 
 
     result = np.dot(up2_lang_vec, np.transpose(lang_vectors[2]))
-    f.write("dot product of bigrams vector and sum_single_letter_and_bigrams vector is %d\n" % (result))
+    f.write("dot product of bigrams vector and up2_lang_vec is %d\n" % (result))
 
     f.close()
     

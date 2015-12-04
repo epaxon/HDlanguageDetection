@@ -239,4 +239,4 @@ What is the dot product of the
 dot product of single letter vector with itself is 9585048578024
 
 dot product of bigrams vector with itself is 1227192552
-dot product of bigrams vector and sum_single_letter_and_bigrams vector is 631419720
+dot product of bigrams vector and up2_lang_vec is 631419720
