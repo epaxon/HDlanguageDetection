@@ -140,7 +140,6 @@ if __name__ == "__main__":
         print "dot product of bigrams vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
-
     print "After you have gotten this far, make a language vector\n\
     that combines individual letters, bigrams and trigrams:\n\
     just add those three language vectors into a single\n\
@@ -159,7 +158,7 @@ if __name__ == "__main__":
     print "dot product of up3_lang_vec vector and bigrams vector is %d" % (result)
     print ""
 
-    up3_lang_vec_sQ = np.multiply(up3_lang_vec, single_sQ)
+    up3_lang_vec_sQ = np.multiply(up3_lang_vec, sQ)
     for i in range(26):
         result = np.dot(up3_lang_vec_sQ, RI_letters[i])
         print "dot product of up3_lang_vec_sQ vector and %s-vector is %d" % (alph[i], result) 
