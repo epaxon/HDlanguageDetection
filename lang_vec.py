@@ -60,6 +60,7 @@ up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
 up3_lang_vec = np.add(up2_lang_vec, lang_vectors[3])
 qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
+#qu_vector = np.add(RI_letters[alph.find("u")], np.roll(RI_letters[alph.find("q")], 1))
 if __name__ == "__main__":
     f = open("exercise_results.txt", "w")
     f.write("Take the language vector representing single letters of\n\
@@ -163,15 +164,18 @@ if __name__ == "__main__":
     Some of the dot products with letter vectors are very\n\
     large negative (-362566580680).  You could be\n\
     multiplying vectors when you should be adding them.\n")
-    for i in range(26):
-        result = np.dot(RI_letters[i], np.transpose(RI_letters[i]))
-        f.write("dot product of %s-vector and %s-vector is %d\n" % (alph[i], alph[i], result))
+    #for i in range(26):
+    #    result = np.dot(RI_letters[i], np.transpose(RI_letters[i]))
+    #    f.write("dot product of %s-vector and %s-vector is %d\n" % (alph[i], alph[i], result))
+
+    result = np.dot(lang_vectors[1], np.transpose(lang_vectors[1]))
+    f.write("\ndot product of single letter vector with itself is %d\n" % (result)) 
 
     result = np.dot(lang_vectors[2], np.transpose(lang_vectors[2]))
-    f.write("\ndot product of bigrams vector with itself is %d" % (result)) 
-    for i in range(26):
-        sum_single_letter_and_bigrams = np.add(RI_letters[i], lang_vectors[2])
-        result = np.dot(sum_single_letter_and_bigrams, np.transpose(lang_vectors[2]))
-        f.write("dot product of bigrams vector and sum_single_%s_and_bigrams vector is %d\n" % (alph[i], result))
+    f.write("\ndot product of bigrams vector with itself is %d\n" % (result)) 
+
+    sum_single_letter_and_bigrams = np.add(lang_vectors[1], lang_vectors[2])
+    result = np.dot(sum_single_letter_and_bigrams, np.transpose(lang_vectors[2]))
+    f.write("dot product of bigrams vector and sum_single_letter_and_bigrams vector is %d\n" % (result))
     f.close()
     

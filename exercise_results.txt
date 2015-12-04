@@ -235,56 +235,8 @@ What is the dot product of the
     Some of the dot products with letter vectors are very
     large negative (-362566580680).  You could be
     multiplying vectors when you should be adding them.
-dot product of a-vector and a-vector is 10000
-dot product of b-vector and b-vector is 10000
-dot product of c-vector and c-vector is 10000
-dot product of d-vector and d-vector is 10000
-dot product of e-vector and e-vector is 10000
-dot product of f-vector and f-vector is 10000
-dot product of g-vector and g-vector is 10000
-dot product of h-vector and h-vector is 10000
-dot product of i-vector and i-vector is 10000
-dot product of j-vector and j-vector is 10000
-dot product of k-vector and k-vector is 10000
-dot product of l-vector and l-vector is 10000
-dot product of m-vector and m-vector is 10000
-dot product of n-vector and n-vector is 10000
-dot product of o-vector and o-vector is 10000
-dot product of p-vector and p-vector is 10000
-dot product of q-vector and q-vector is 10000
-dot product of r-vector and r-vector is 10000
-dot product of s-vector and s-vector is 10000
-dot product of t-vector and t-vector is 10000
-dot product of u-vector and u-vector is 10000
-dot product of v-vector and v-vector is 10000
-dot product of w-vector and w-vector is 10000
-dot product of x-vector and x-vector is 10000
-dot product of y-vector and y-vector is 10000
-dot product of z-vector and z-vector is 10000
 
-dot product of bigrams vector with itself is 1227192552dot product of bigrams vector and sum_single_a_and_bigrams vector is 1227235228
-dot product of bigrams vector and sum_single_b_and_bigrams vector is 1227180332
-dot product of bigrams vector and sum_single_c_and_bigrams vector is 1227191224
-dot product of bigrams vector and sum_single_d_and_bigrams vector is 1227240580
-dot product of bigrams vector and sum_single_e_and_bigrams vector is 1227200980
-dot product of bigrams vector and sum_single_f_and_bigrams vector is 1227144996
-dot product of bigrams vector and sum_single_g_and_bigrams vector is 1227158860
-dot product of bigrams vector and sum_single_h_and_bigrams vector is 1227180112
-dot product of bigrams vector and sum_single_i_and_bigrams vector is 1227140672
-dot product of bigrams vector and sum_single_j_and_bigrams vector is 1227176336
-dot product of bigrams vector and sum_single_k_and_bigrams vector is 1227152236
-dot product of bigrams vector and sum_single_l_and_bigrams vector is 1227256472
-dot product of bigrams vector and sum_single_m_and_bigrams vector is 1227146128
-dot product of bigrams vector and sum_single_n_and_bigrams vector is 1227235484
-dot product of bigrams vector and sum_single_o_and_bigrams vector is 1227166688
-dot product of bigrams vector and sum_single_p_and_bigrams vector is 1227135936
-dot product of bigrams vector and sum_single_q_and_bigrams vector is 1227180132
-dot product of bigrams vector and sum_single_r_and_bigrams vector is 1227189932
-dot product of bigrams vector and sum_single_s_and_bigrams vector is 1227116728
-dot product of bigrams vector and sum_single_t_and_bigrams vector is 1227167692
-dot product of bigrams vector and sum_single_u_and_bigrams vector is 1227188388
-dot product of bigrams vector and sum_single_v_and_bigrams vector is 1227227260
-dot product of bigrams vector and sum_single_w_and_bigrams vector is 1227184908
-dot product of bigrams vector and sum_single_x_and_bigrams vector is 1227191012
-dot product of bigrams vector and sum_single_y_and_bigrams vector is 1227220880
-dot product of bigrams vector and sum_single_z_and_bigrams vector is 1227186428
+dot product of single letter vector with itself is 9585048578024
+
+dot product of bigrams vector with itself is 1227192552
+dot product of bigrams vector and sum_single_letter_and_bigrams vector is 631419720
