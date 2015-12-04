@@ -62,9 +62,6 @@ qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
 if __name__ == "__main__":
 
-    up2_lang_vec = np.add(lang_vectors[1], lang_vectors[2])
-    qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
-
     print "Take the language vector representing single letters of\n\
     Alice and compute its dot product with the 26 different\n\
     letter vectors.  Can you see a relation between the dot\n\
@@ -147,14 +144,16 @@ if __name__ == "__main__":
     single letters and bigrams as above.  Also, multiply it\n\
     with sQ and test the result as above.  The dot products\n\
     should be close to what you got before.\n"
-    
+    print up3_lang_vec
     for i in range(26):
         result = np.dot(up3_lang_vec, RI_letters[i])
         print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
     #idk why the vectors are nested in lists
-    result = np.dot(np.transpose(up3_lang_vec[0]), lang_vectors[2][0])
+    print up3_lang_vec
+
+    result = np.dot(up3_lang_vec[0], lang_vectors[2][0])
     print "dot product of up3_lang_vec vector and bigrams vector is %d" % (result)
     print ""
 
