@@ -144,16 +144,12 @@ if __name__ == "__main__":
     single letters and bigrams as above.  Also, multiply it\n\
     with sQ and test the result as above.  The dot products\n\
     should be close to what you got before.\n"
-    print up3_lang_vec
     for i in range(26):
         result = np.dot(up3_lang_vec, RI_letters[i])
         print "dot product of up3_lang_vec vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
-    #idk why the vectors are nested in lists
-    print up3_lang_vec
-
-    result = np.dot(up3_lang_vec[0], lang_vectors[2][0])
+    result = np.dot(up3_lang_vec, np.transpose(lang_vectors[2]))
     print "dot product of up3_lang_vec vector and bigrams vector is %d" % (result)
     print ""
 
@@ -163,7 +159,7 @@ if __name__ == "__main__":
         print "dot product of up3_lang_vec_sQ vector and %s-vector is %d" % (alph[i], result) 
     print ""
 
-    result = np.dot(np.transpose(up3_lang_vec_sQ[0]), lang_vectors[2][0])
+    result = np.dot(up3_lang_vec_sQ, np.transpose(lang_vectors[2]))
     print "dot product of up3_lang_vec_sQ and bigrams vector is %d" % (result)
 
 
