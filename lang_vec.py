@@ -173,11 +173,30 @@ if __name__ == "__main__":
     result = np.dot(lang_vectors[1], np.transpose(lang_vectors[1]))
     f.write("\ndot product of single letter vector with itself is %d\n" % (result)) 
 
+    result = np.dot(lang_vectors[2], np.transpose(lang_vectors[1]))
+    f.write("\ndot product of bigrams vector with single-letter vector is %d\n" % (result))
+
     result = np.dot(lang_vectors[2], np.transpose(lang_vectors[2]))
     f.write("\ndot product of bigrams vector with itself is %d\n" % (result)) 
 
     result = np.dot(up2_lang_vec, np.transpose(lang_vectors[2]))
     f.write("dot product of bigrams vector and up2_lang_vec is %d\n" % (result))
 
+    #too much noise because other bigrams like th much more common. 
+    #that's why get negative number
+    result = np.dot(bigrams_sQ, np.transpose(RI_letters[alph.find("u")]))
+    f.write("dot product of bigrams_sQ vector and u vector is %d\n" % (result))
+
+
+    #manual_qu_vector = np.multiply(sQ, RI_letters[alph.find("u")])
+    #f.write("qu_vector\n")
+    #print qu_vector
+    #f.write("\nmanual_qu_vector\n")
+    #print manual_qu_vector
+    #sQ_squared = np.multiply(sQ, sQ)
+    #print sQ_squared
+    
+    #if predict poor, bc bigram poor, or at end of word
+    #then do the up#_lang_vecs to predict bigrams, ngrams, etc simultaneously
     f.close()
     

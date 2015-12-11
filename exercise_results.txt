@@ -238,5 +238,8 @@ What is the dot product of the
 
 dot product of single letter vector with itself is 9585048578024
 
+dot product of bigrams vector with single-letter vector is -595772832
+
 dot product of bigrams vector with itself is 1227192552
 dot product of bigrams vector and up2_lang_vec is 631419720
+dot product of bigrams_sQ vector and u vector is -7924
