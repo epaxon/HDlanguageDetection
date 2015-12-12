@@ -60,41 +60,23 @@ def id_vector(N, cluster, alphabet, RI_letters,ordered=0):
                 return cluster_cache[cluster]
                 
         vector = np.zeros(N)
-        first = cluster[0]
-        repeats = 0
-        for char in cluster:
-                        if first == char:
-                                        repeats += 1
-
-        if repeats == len(cluster):
-                        # check if cluster all same letter
-                        letter_idx = alphabet.find(first)
-                        #print first, RI_letters[letter_idx,:]
-                        vector = RI_letters[letter_idx,:]
-        else:
+        
                         
-                                        # letters = list(cluster)
-# 					prod = np.ones((1,N))
-# 					for letter in letters:
-# 							letter_idx = alphabet.find(letter)
-# 							prod = np.multiply(prod, RI_letters[letter_idx,:])
-# 					vector = prod
+        # ordered clusters
+        letters = list(cluster)
+        prod = np.ones((1,N))
+        roller = len(letters)-1
+        for letter in letters:
+                        # working code
+                        #letter_idx = alphabet.find(letter)
+                        #prod = np.multiply(prod, RI_letters[letter_idx,:])
+                        #prod = np.roll(prod,1)
                         
-                        # ordered clusters
-                        letters = list(cluster)
-                        prod = np.ones((1,N))
-                        roller = len(letters)-1
-                        for letter in letters:
-                                        # working code
-                                        #letter_idx = alphabet.find(letter)
-                                        #prod = np.multiply(prod, RI_letters[letter_idx,:])
-                                        #prod = np.roll(prod,1)
-                                        
-                                        # testing permutations
-                                        letter_idx = alphabet.find(letter)
-                                        prod = np.multiply(prod, np.roll(RI_letters[letter_idx, :],roller))
-                                        roller -= 1
-                        vector = prod
+                        # testing permutations
+                        letter_idx = alphabet.find(letter)
+                        prod = np.multiply(prod, np.roll(RI_letters[letter_idx, :],roller))
+                        roller -= 1
+        vector = prod
 
         if len(cluster_cache) > 100000:
                 cluster_cache.clear()
@@ -168,7 +150,7 @@ def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=al
 			continue
 		elif len(cluster) > cluster_sz:
 			prev_letter = cluster[0]
-			prev_letter_idx = alphabet.find(letter)
+			prev_letter_idx = alphabet.find(prev_letter)
 			inverse = np.roll(RI_letters[prev_letter_idx,:], cluster_sz-1)
 			vector = np.multiply(vector, inverse)
 			vector = np.roll(vector, 1)
