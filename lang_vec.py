@@ -196,5 +196,19 @@ if __name__ == "__main__":
     
     #if predict poor, bc bigram poor, or at end of word
     #then do the up#_lang_vecs to predict bigrams, ngrams, etc simultaneously
+    av26 = np.zeros((1,N))
+
+    print av26
+    for i in range(26):
+        av26 += RI_letters[i]
+    print av26
+    result = np.dot(av26, np.transpose(RI_letters[alph.find("a")]))
+    f.write("dot product of av26 vector and a vector is %d\n" % (result))
+
+    result = np.dot(av26, np.transpose(av26))
+    f.write("dot product of av26 vector and itself is %d\n" % (result))
+
+    result = np.dot(av26, np.transpose(lang_vectors[1]))
+    f.write("dot product of av26 vector and unigrams is %d\n" % (result))
     f.close()
     

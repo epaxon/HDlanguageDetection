@@ -258,3 +258,6 @@ dot product of bigrams vector with single-letter vector is -8893463440
 dot product of bigrams vector with itself is 1110542530400
 dot product of bigrams vector and up2_lang_vec is 1101649066960
 dot product of bigrams_sQ vector and u vector is 3069488
+dot product of av26 vector and a vector is 10472
+dot product of av26 vector and itself is 259520
+dot product of av26 vector and unigrams is 1208703460
