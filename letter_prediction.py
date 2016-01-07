@@ -78,7 +78,7 @@ def predict(pref, length):
 if __name__ == "__main__":
     f = open("letter_prediction_results.txt", "w")
     for word in search_words:
-        for i in range(0, len(word)):
+        for i in range(0, len(word)-1):
             queue = predict(word[0:i+1], i+1)
             while not queue.empty():
                 tpl = queue.get()
