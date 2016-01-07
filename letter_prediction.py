@@ -79,7 +79,7 @@ if __name__ == "__main__":
     f = open("letter_prediction_results.txt", "w")
     for word in search_words:
         for i in range(0, len(word)):
-            queue = predict(word[0:i], i)
+            queue = predict(word[0:i+1], i+1)
             while not queue.empty():
                 tpl = queue.get()
                 f.write("dot product of %d-gram*s%s vector and %s letter vector is %d\n\n" % (tpl[2], tpl[3], tpl[4], tpl[1]))
