@@ -166,6 +166,31 @@ def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=al
 				vector = np.multiply(vector, RI_letters[letter_idx,:])
 		text_vector += vector
 	return text_vector
+ 
+ 
+ 
+def generate_text_vector(N, RI_letters, cluster_sz, text_name):
+    text_vector = np.zeros((1,N))
+
+    text = utils.load_text(text_name)
+
+    for char_idx in xrange(len(text)-cluster_sz+1):
+        sidx = char_idx
+        eidx = char_idx+cluster_sz
+        
+        cluster = text[sidx:eidx]
+        
+        vector = np.ones((1,N))
+        for letter in cluster:
+            letter_idx = alphabet.find(letter)
+            vector = np.roll(vector, 1)
+            vector = np.multiply(vector, RI_letters[letter_idx, :])
+            
+        text_vector += vector
+    return text_vector / (len(text)-cluster_sz+1)
+    
+    
+    
 		
 def generate_RI_text_words(N, RI_letters, text_name, alph=alphabet):
 		# generate RI vector for "text_name"
