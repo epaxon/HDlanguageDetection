@@ -51,10 +51,7 @@ def generate_letter_id_vectors(N, k, alph=alphabet):
 def generate_text_vector(N, RI_letters, cluster_sz, text):
     text_vector = np.zeros(N)
 
-    for char_idx in xrange(len(text)-cluster_sz+1):
-        if (char_idx % 1000) == 0:
-            print char_idx,
-           
+    for char_idx in xrange(len(text)-cluster_sz+1): 
         sidx = char_idx
         eidx = char_idx+cluster_sz
         
