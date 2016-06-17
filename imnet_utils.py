@@ -15,21 +15,33 @@ def load_random_imnet(num_images=1, base_dir='data/image_net/'):
     for i in range(num_images):
         ims.append(plt.imread(im_list[idxs[i]]))            
     return ims
+
+def load_imnet(base_dir='data/image_net/'):
+    ims = []
+    
+    im_list = glob.glob(base_dir + '*.JPEG')
+    
+    for imfname in im_list:
+        ims.append(plt.imread(imfname))
+        
+    return ims
     
     
 def load_random_imnet_patches(num_images=1, patch_size=(20,20)):
     
-    ims = load_random_imnet(num_images)
+    ims = load_imnet()
     
     im_patches = np.zeros((patch_size[0], patch_size[1], 3, num_images))
     
-    for idx,im in enumerate(ims):
+    for idx in range(num_images):
         if idx % 1000 == 0:
             print idx,
         cc=1
-        while patch_size[0] > im.shape[0] or patch_size[1] > im.shape[1]:
+        im = ims[np.random.randint(len(ims))]
+        
+        while patch_size[0] >= im.shape[0]-1 or patch_size[1] >= im.shape[1]-1:
             # load a different image
-            im = load_random_imnet(1)[0]
+            im = ims[np.random.randint(len(ims))]
             cc += 1
             if cc > 20:
                 raise "patch size to large."
