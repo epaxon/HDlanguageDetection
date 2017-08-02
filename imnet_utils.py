@@ -16,10 +16,14 @@ def load_random_imnet(num_images=1, base_dir='data/image_net/'):
         ims.append(plt.imread(im_list[idxs[i]]))            
     return ims
 
-def load_imnet(base_dir='data/image_net/'):
+def load_imnet(base_dir='data/image_net/', max_ims=None):
     ims = []
     
     im_list = glob.glob(base_dir + '*.JPEG')
+    np.random.shuffle(im_list)
+    
+    if max_ims is not None and max_ims < len(im_list):
+        im_list = im_list[:max_ims]
     
     for imfname in im_list:
         ims.append(plt.imread(imfname))
@@ -29,7 +33,7 @@ def load_imnet(base_dir='data/image_net/'):
     
 def load_random_imnet_patches(num_images=1, patch_size=(20,20)):
     
-    ims = load_imnet()
+    ims = load_imnet(max_ims=num_images)
     
     im_patches = np.zeros((patch_size[0], patch_size[1], 3, num_images))
     

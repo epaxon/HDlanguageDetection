@@ -1,0 +1,7 @@
+figures/
+.ipynb_checkpoints/
+*.mp4
+*.mov
+*.mov
+*.wav
+*.pyc
